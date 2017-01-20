@@ -452,7 +452,8 @@ PlayerSettings:
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    UNet: 1
   cloudProjectId: 3190eae4-ecda-4fd9-a873-af69dfd9d8d4
   projectName: Waveforming
   organizationId: morusque
