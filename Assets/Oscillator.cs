@@ -67,7 +67,7 @@ public class OneOsc
             previewSfx.GetComponent<AudioSource>().Play();
             prevShape = shape;
         }
-        previewSfx.GetComponent<AudioSource>().pitch = frequency;
+        previewSfx.GetComponent<AudioSource>().pitch = frequency*0.2f;
         previewSfx.GetComponent<AudioSource>().volume = amplitude;
     }
 
