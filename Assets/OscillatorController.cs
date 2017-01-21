@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class OscillatorController : MonoBehaviour {
 
-    public InputController input;
     public Oscillator oscillator;
 
     public float minFrequency = 1.0f;
@@ -14,6 +13,11 @@ public class OscillatorController : MonoBehaviour {
     public float maxAmplitude = 100.0f;
 
     public float phaseChangeFactor = 1.0f;
+
+    void Start()
+    {
+        m_statesManager = FindObjectOfType<StatesManager>();
+    }
 
     void Update ()
     {
@@ -28,28 +32,29 @@ public class OscillatorController : MonoBehaviour {
 
         OneOsc currentOscillator = oscillator.osc[m_currentWave];
 
-        if (!input.IsAmplitudeLocked())
-            currentOscillator.amplitude = Mathf.Lerp(minAmplitude, maxAmplitude, input.GetAmplitude());
+        if (!m_statesManager.input.IsAmplitudeLocked())
+            currentOscillator.amplitude = Mathf.Lerp(minAmplitude, maxAmplitude, m_statesManager.input.GetAmplitude());
 
-        if (!input.IsFrequencyLocked())
-            currentOscillator.frequency = Mathf.Lerp(minFrequency, maxFrequency, input.GetFrequency());
+        if (!m_statesManager.input.IsFrequencyLocked())
+            currentOscillator.frequency = Mathf.Lerp(minFrequency, maxFrequency, m_statesManager.input.GetFrequency());
 
-        if (input.GetSineShapeChange()) currentOscillator.shape = OneOsc.WaveShape.sine;
-        if (input.GetSquareShapeChange()) currentOscillator.shape = OneOsc.WaveShape.square;
-        if (input.GetSawShapeChange()) currentOscillator.shape = OneOsc.WaveShape.saw;
-        if (input.GetNoiseShapeChange()) currentOscillator.shape = OneOsc.WaveShape.noise;
+        if (m_statesManager.input.GetSineShapeChange()) currentOscillator.shape = OneOsc.WaveShape.sine;
+        if (m_statesManager.input.GetSquareShapeChange()) currentOscillator.shape = OneOsc.WaveShape.square;
+        if (m_statesManager.input.GetSawShapeChange()) currentOscillator.shape = OneOsc.WaveShape.saw;
+        if (m_statesManager.input.GetNoiseShapeChange()) currentOscillator.shape = OneOsc.WaveShape.noise;
 
-        currentOscillator.phase += input.GetPhase() * phaseChangeFactor;
+        currentOscillator.phase += m_statesManager.input.GetPhase() * phaseChangeFactor;
 
-        if (input.NextWave())
+        if (m_statesManager.input.NextWave())
         {
             m_currentWave = (m_currentWave + 1) % oscillator.osc.Length;
         }
-        if (input.PreviousWave())
+        if (m_statesManager.input.PreviousWave())
         {
             m_currentWave = (m_currentWave - 1 + oscillator.osc.Length) % oscillator.osc.Length;
         }
     }
 
     int m_currentWave = 0;
+    StatesManager m_statesManager;
 }
