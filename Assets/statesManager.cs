@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatesManager : MonoBehaviour {
 
-    GameStates state = GameStates.running;
+    public GameStates state = GameStates.running;
 
 	void Start () {
 		
@@ -23,7 +23,7 @@ public class StatesManager : MonoBehaviour {
         else Time.timeScale = 1;
     }
 
-    enum GameStates
+    public enum GameStates
     {
         running,
         terraform
