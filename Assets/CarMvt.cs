@@ -28,9 +28,12 @@ public class CarMvt : MonoBehaviour {
 
         if (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(7.0f, 0));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(15.0f, 0));
             transform.position = new Vector2(((transform.position.x+100)%200)-100, transform.position.y);
             lastRunningPosition = new Vector2(transform.position.x, transform.position.y);
+            int layer = LayerMask.GetMask("Terrain");
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + heightLookup), Vector2.down, heightLookup, layer);
+            if (hit.collider != null) if (hit.point.y > transform.position.y) transform.position = new Vector2(transform.position.x, hit.point.y + transform.localScale.y / 2);
         }
 
     }
