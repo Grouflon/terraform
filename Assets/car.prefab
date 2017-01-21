@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50586710989074712}
   - component: {fileID: 58985048610361370}
   - component: {fileID: 114758921708735778}
+  - component: {fileID: 114756089479197728}
   m_Layer: 0
   m_Name: car
   m_TagString: Untagged
@@ -116,6 +117,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114756089479197728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1342514292745678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd6c85d29673e8468cd9492f8c96b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runningMaterial: {fileID: 2100000, guid: c8079e8d980f5d2449b1f5e2b651bbc0, type: 2}
+  terraformingMaterial: {fileID: 2100000, guid: f83b690bea9fa6749a61b5a96a0d6869,
+    type: 2}
 --- !u!114 &114758921708735778
 MonoBehaviour:
   m_ObjectHideFlags: 1

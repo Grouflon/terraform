@@ -14,27 +14,31 @@ public class StatesManager : MonoBehaviour
 	}
 	
 	void Update () {
-        /*if (input.ToggleGameState())
+        if (input.GetAnyShapeMode())
         {
-            if (state == GameStates.terraform) state = GameStates.running;
-            else state = GameStates.terraform;
-        }*/
+            state = GameStates.terraform;
+        }
+        else
+        {
+            state = GameStates.running;
+        }
 
-        state = input.currentGameState();
 
         if (state == GameStates.terraform)
         {
             // Time.timeScale = 0;
-            oscController.enabled = true;
+            //oscController.enabled = true;
 
             Camera.main.backgroundColor = Color.black;
+            Camera.main.GetComponent<PostRenderer>().enabled = true;
         }
         else
         {
             // Time.timeScale = 1;
-            oscController.enabled = false;
+            //oscController.enabled = false;
 
             Camera.main.backgroundColor = new Color(146.0f / 255.0f, 174.0f / 255.0f, 1.0f);
+            Camera.main.GetComponent<PostRenderer>().enabled = false;
         }
     }
 

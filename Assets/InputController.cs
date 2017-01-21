@@ -4,18 +4,19 @@ using UnityEngine;
 
 public abstract class InputController : MonoBehaviour
 {
-    public abstract bool ToggleGameState();
-    public abstract StatesManager.GameStates currentGameState();
-    
     public abstract bool PreviousWave();
     public abstract bool NextWave();
-    public abstract bool IsFrequencyLocked();
-    public abstract bool IsAmplitudeLocked();
-    public abstract float GetFrequency();
-    public abstract float GetAmplitude();
-    public abstract float GetPhase();
-    public abstract bool GetSineShapeChange();
-    public abstract bool GetSquareShapeChange();
-    public abstract bool GetSawShapeChange();
-    public abstract bool GetNoiseShapeChange();
+    public abstract float GetFrequencyChange();
+    public abstract float GetAmplitudeChange();
+    public abstract float GetPhaseChange();
+
+    public abstract bool GetSineShapeMode();
+    public abstract bool GetSquareShapeMode();
+    public abstract bool GetSawShapeMode();
+    public abstract bool GetNoiseShapeMode();
+
+    public bool GetAnyShapeMode()
+    {
+        return GetSineShapeMode() || GetSquareShapeMode() || GetSawShapeMode() || GetNoiseShapeMode();
+    }
 }

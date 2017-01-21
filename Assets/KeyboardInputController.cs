@@ -4,75 +4,55 @@ using UnityEngine;
 
 public class KeyboardInputController : InputController {
 
-    public float amplitudeSensitivity = 0.01f;
-    public float frequencySensitivity = 0.01f;
-
-    float m_amplitude = 0.0f;
-    float m_frequency = 0.0f;
-
-    void Update()
+    public override float GetAmplitudeChange()
     {
-        if (!IsAmplitudeLocked())
-        {
-            if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W))
-            {
-                m_amplitude = Mathf.Clamp01(m_amplitude + amplitudeSensitivity);
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                m_amplitude = Mathf.Clamp01(m_amplitude - amplitudeSensitivity);
-            }
-        }
+        float result = 0.0f;
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q))
+            result -= 1.0f;
+        if (Input.GetKey(KeyCode.D))
+            result += 1.0f;
 
-        if (!IsFrequencyLocked())
-        {
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q))
-            {
-                m_frequency = Mathf.Clamp01(m_frequency - frequencySensitivity);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                m_frequency = Mathf.Clamp01(m_frequency + frequencySensitivity);
-            }
-        }
+        return result;
     }
 
-    public override float GetAmplitude()
+    public override float GetFrequencyChange()
     {
-        return m_amplitude;
+        float result = 0.0f;
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z))
+            result += 1.0f;
+        if (Input.GetKey(KeyCode.S))
+            result += 1.0f;
+
+        return result;
     }
 
-    public override float GetFrequency()
-    {
-        return m_frequency;
-    }
-
-    public override float GetPhase()
+    public override float GetPhaseChange()
     {
         float result = 0.0f;
         if (Input.GetKey(KeyCode.LeftArrow))
             result -= 1.0f;
         if (Input.GetKey(KeyCode.RightArrow))
             result += 1.0f;
+
         return result;
     }
 
-    public override bool GetSineShapeChange()
+    public override bool GetSineShapeMode()
     {
         return Input.GetKey(KeyCode.Keypad1);
     }
 
-    public override bool GetSquareShapeChange()
+    public override bool GetSquareShapeMode()
     {
         return Input.GetKey(KeyCode.Keypad2);
     }
 
-    public override bool GetSawShapeChange()
+    public override bool GetSawShapeMode()
     {
         return Input.GetKey(KeyCode.Keypad3);
     }
 
-    public override bool GetNoiseShapeChange()
+    public override bool GetNoiseShapeMode()
     {
         return Input.GetKey(KeyCode.Keypad4);
     }
@@ -86,35 +66,4 @@ public class KeyboardInputController : InputController {
     {
         return Input.GetKeyDown(KeyCode.DownArrow);
     }
-
-    public override bool IsFrequencyLocked()
-    {
-        return !Input.GetKey(KeyCode.Keypad1)
-            && !Input.GetKey(KeyCode.Keypad2)
-            && !Input.GetKey(KeyCode.Keypad3)
-            && !Input.GetKey(KeyCode.Keypad4);
-    }
-
-    public override bool IsAmplitudeLocked()
-    {
-        return !Input.GetKey(KeyCode.Keypad1)
-            && !Input.GetKey(KeyCode.Keypad2)
-            && !Input.GetKey(KeyCode.Keypad3)
-            && !Input.GetKey(KeyCode.Keypad4);
-    }
-
-    public override bool ToggleGameState()
-    {
-        return Input.GetKeyDown(KeyCode.Space);
-    }
-
-    public override StatesManager.GameStates currentGameState()
-    {
-        return Input.GetKey(KeyCode.Keypad1)
-            || Input.GetKey(KeyCode.Keypad2)
-            || Input.GetKey(KeyCode.Keypad3)
-            || Input.GetKey(KeyCode.Keypad4)?
-            StatesManager.GameStates.terraform:StatesManager.GameStates.running;
-    }
-
 }

@@ -5,43 +5,37 @@ using UnityEngine;
 
 public class GamepadInputController : InputController
 {
-    public override float GetAmplitude()
+    public override float GetAmplitudeChange()
     {
-        //Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        //return input.magnitude;
-
-        return (1.0f + Input.GetAxis("Vertical")) * 0.5f;
+        return Input.GetAxis("Vertical");
     }
 
-    public override float GetFrequency()
+    public override float GetFrequencyChange()
     {
-        //Vector2 input = new Vector2(Input.GetAxis("RightHorizontal"), Input.GetAxis("RightVertical"));
-        //return input.magnitude;
-
-        return (1.0f + Input.GetAxis("Horizontal")) * 0.5f;
+        return Input.GetAxis("Horizontal");
     }
 
-    public override float GetPhase()
+    public override float GetPhaseChange()
     {
         return Input.GetAxis("DPadHorizontal");
     }
 
-    public override bool GetSineShapeChange()
+    public override bool GetSineShapeMode()
     {
         return Input.GetButton("A");
     }
 
-    public override bool GetSquareShapeChange()
+    public override bool GetSquareShapeMode()
     {
         return Input.GetButton("B");
     }
 
-    public override bool GetSawShapeChange()
+    public override bool GetSawShapeMode()
     {
         return Input.GetButton("X");
     }
 
-    public override bool GetNoiseShapeChange()
+    public override bool GetNoiseShapeMode()
     {
         return Input.GetButton("Y");
     }
@@ -54,36 +48,6 @@ public class GamepadInputController : InputController
     public override bool NextWave()
     {
         return Input.GetButtonDown("RightBumper");
-    }
-
-    public override bool IsFrequencyLocked()
-    {
-        return !Input.GetButton("A")
-            && !Input.GetButton("B")
-            && !Input.GetButton("X")
-            && !Input.GetButton("Y");
-    }
-
-    public override bool IsAmplitudeLocked()
-    {
-        return !Input.GetButton("A")
-            && !Input.GetButton("B")
-            && !Input.GetButton("X")
-            && !Input.GetButton("Y");
-    }
-
-    public override bool ToggleGameState()
-    {
-        return Input.GetButtonDown("Start");
-    }
-
-    public override StatesManager.GameStates currentGameState()
-    {
-        return Input.GetButton("A")
-            || Input.GetButton("B")
-            || Input.GetButton("X")
-            || Input.GetButton("Y") ?
-            StatesManager.GameStates.terraform : StatesManager.GameStates.running;
     }
 
 }
