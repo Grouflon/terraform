@@ -77,7 +77,8 @@ public class OneOsc
     }
 
     public float getValueAt(float x) {
-        float phasor = (x * frequency + phase) % (Mathf.PI*2);
+        float phasor = (x * frequency + phase);
+        while (phasor<0||phasor>=Mathf.PI*2) phasor = (phasor + Mathf.PI * 2) % (Mathf.PI*2);
 
         phasor += transport * (Time.time/* % (1.0f / frequency)*/);
 
