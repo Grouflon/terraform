@@ -12,10 +12,14 @@ public class Loot : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Vector2.Distance(car.transform.position, transform.position) < 1)
-        {
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag.Equals("Car")) {
             audioManager.GetComponent<AudioManager>().playLoot();
             Destroy(gameObject);
         }
     }
+
 }
