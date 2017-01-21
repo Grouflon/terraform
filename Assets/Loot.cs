@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour {
 
-    public GameObject car;
-    public GameObject audioManager;
+    public CarMvt car;
+    public AudioManager audioManager;
 
 	void Start () {
-		
-	}
-	
-	void Update () {
+        audioManager = FindObjectOfType<AudioManager>();
+        car = FindObjectOfType<CarMvt>();
+    }
+
+    void Update () {
     }
 
     void OnTriggerEnter2D(Collider2D other)

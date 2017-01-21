@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public GameObject car;
-    public GameObject audioManager;
+    public CarMvt car;
+    public AudioManager audioManager;
 
     void Start()
     {
-
+        audioManager = FindObjectOfType<AudioManager>();
+        car = FindObjectOfType<CarMvt>();
     }
 
     void Update()
