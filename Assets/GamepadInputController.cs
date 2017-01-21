@@ -28,22 +28,22 @@ public class GamepadInputController : InputController
 
     public override bool GetSineShapeChange()
     {
-        return Input.GetButtonDown("A");
+        return Input.GetButton("A");
     }
 
     public override bool GetSquareShapeChange()
     {
-        return Input.GetButtonDown("B");
+        return Input.GetButton("B");
     }
 
     public override bool GetSawShapeChange()
     {
-        return Input.GetButtonDown("X");
+        return Input.GetButton("X");
     }
 
     public override bool GetNoiseShapeChange()
     {
-        return Input.GetButtonDown("Y");
+        return Input.GetButton("Y");
     }
 
     public override bool PreviousWave()
