@@ -17,4 +17,5 @@ public class CarMvt : MonoBehaviour {
             transform.position = pos;
         }
 	}
+    
 }
