@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatesManager : MonoBehaviour {
+public class StatesManager : MonoBehaviour
+{
+    public InputController input;
+    public OscillatorController oscController;
 
     GameStates state = GameStates.running;
 
@@ -11,16 +14,24 @@ public class StatesManager : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Input.GetKeyDown("space"))
+        if (input.ToggleGameState())
         {
-            state = GameStates.terraform;
+            if (state == GameStates.terraform)
+                state = GameStates.running;
+            else
+                state = GameStates.terraform;
+        }
+
+        if (state == GameStates.terraform)
+        {
+            Time.timeScale = 0;
+            oscController.enabled = true;
         }
         else
         {
-            state = GameStates.running;
+            Time.timeScale = 1;
+            oscController.enabled = false;
         }
-        if (state == GameStates.terraform) Time.timeScale = 0;
-        else Time.timeScale = 1;
     }
 
     enum GameStates

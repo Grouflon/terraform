@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PostRenderer : MonoBehaviour {
-
-    public bool enabled = true;
+public class PostRenderer : MonoBehaviour
+{
 
     private Material mat;
 

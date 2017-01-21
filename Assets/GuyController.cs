@@ -49,6 +49,12 @@ public class GuyController : MonoBehaviour {
                 transform.LookAt(position + forward, hit.normal);
             }
         }
+        else
+        {
+            // TURN BACK
+            m_goingRight = !m_goingRight;
+            transform.position = previousPosition;
+        }
 	}
 
     private bool m_goingRight = true;
