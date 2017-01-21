@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour {
     public StatesManager statesManager;
 
     public AudioSource runningMusic;
+    public AudioSource loot;
 
     void Start () {
         statesManager = FindObjectOfType<StatesManager>();
@@ -15,5 +16,10 @@ public class AudioManager : MonoBehaviour {
 
     void Update () {
         runningMusic.volume = statesManager.GetComponent<StatesManager>().state==StatesManager.GameStates.running?1:0;
+    }
+
+    public void playLoot()
+    {
+        loot.Play();
     }
 }
