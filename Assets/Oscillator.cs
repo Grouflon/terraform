@@ -56,6 +56,10 @@ public class OneOsc
         {
             return ((phasor/(Mathf.PI*2))-0.5f) * -amplitude;
         }
+        if (shape == WaveShape.noise)
+        {
+            return (Mathf.PerlinNoise(phasor,0)-0.5f)*amplitude;
+        }
         return 0;
     }
 
