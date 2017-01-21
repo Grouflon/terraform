@@ -66,13 +66,13 @@ public class OneOsc
         {
             previewSfx = Object.Instantiate(parent.sfxModel);
         }
-        if (prevShape!=shape) { 
+        if (!prevShape.Equals(shape)) {
             previewSfx.GetComponent<AudioSource>().clip = previewSfx.GetComponent<OscPreview>().loops[(int)shape];
             previewSfx.GetComponent<AudioSource>().Play();
             prevShape = shape;
         }
-        previewSfx.GetComponent<AudioSource>().pitch = frequency*0.2f;
-        previewSfx.GetComponent<AudioSource>().volume = parent.statesManager.state == StatesManager.GameStates.terraform ? amplitude : 0.0f;
+        previewSfx.GetComponent<AudioSource>().pitch = frequency*0.2f; 
+        previewSfx.GetComponent<AudioSource>().volume = (parent.statesManager.state == StatesManager.GameStates.terraform) ? Mathf.Abs(amplitude) : 0.0f;
     }
 
     public void extinct()
