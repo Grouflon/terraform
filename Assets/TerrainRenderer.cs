@@ -41,12 +41,15 @@ public class TerrainRenderer : MonoBehaviour {
 
         for (int i = 0; i < terrainLength ; ++i)
         {
-            colliderPoints[i] = new Vector2(i * stepSize, oscillator.surfaceHeights[i]);
+            float xPosition = i * stepSize;
+            float value = oscillator.surfaceHeights[i] * amplifier + heightConstant;
+
+            colliderPoints[i] = new Vector2(xPosition, value);
 
             /*m_vertices[i * 2 + 0] = new Vector3(i * stepSize, oscillator.surfaceHeights[i] * amplifier + heightConstant, 0.0f);
             m_vertices[i * 2 + 1] = new Vector3(i * stepSize, 0.0f, 0.0f);*/
 
-            linePoints[i] = new Vector3(i * stepSize, oscillator.surfaceHeights[i] * amplifier + heightConstant, 0.0f);
+            linePoints[i] = new Vector3(xPosition, value, 0.0f);
 
             /*if (i < terrainLength - 1)
             {

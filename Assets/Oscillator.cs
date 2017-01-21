@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Oscillator : MonoBehaviour {
 
     [Range(-5.0f, 5.0f)]
@@ -32,10 +33,14 @@ public class OneOsc
     public float frequency = 1;
     public float amplitude = 1;
     public float phase = 1;
+    public float transport = 0;
     public WaveShape shape = WaveShape.sine;
     
     public float getValueAt(float x) {
         float phasor = (x * frequency + phase) % (Mathf.PI*2);
+
+        phasor += transport * (Time.time/* % (1.0f / frequency)*/);
+
         if (shape == WaveShape.sine)
         {
             return Mathf.Sin(phasor) * amplitude;
