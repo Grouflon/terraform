@@ -29,7 +29,12 @@ public class Oscillator : MonoBehaviour
         }
         for (int i = 0; i < osc.Length; i++) osc[i].parent = this;
         for (int i = 0; i < osc.Length; i++) osc[i].Update();
-        for (int i= osc.Length ; i<prevOsc.Length ; i++) prevOsc[i].extinct();
+        for (int i = 0; i < prevOsc.Length; i++)
+        {
+            bool found = false;
+            for (int j = 0; j < osc.Length; j++) if (osc[j] == prevOsc[i]) found = true;
+            if (!found) prevOsc[i].extinct();
+        }
         prevOsc = new OneOsc[osc.Length];
         for (int i = 0; i < osc.Length; i++) prevOsc[i] = osc[i];
     }
