@@ -2,26 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class Oscillator : MonoBehaviour {
+// [ExecuteInEditMode]
+public class Oscillator : MonoBehaviour
+{
 
     [Range(-5.0f, 5.0f)]
     public float[] surfaceHeights;
-    public OneOsc[] osc = new OneOsc[1];
+    public OneOsc[] osc = new OneOsc[0];
+    OneOsc[] prevOsc = new OneOsc[0];
+    public AudioSource sfxModel;
     
-    void Start () {
-		
-	}
-	
-	void Update () {
-        for (int j=0 ; j<surfaceHeights.Length ; j++)
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        for (int j = 0; j < surfaceHeights.Length; j++)
         {
             surfaceHeights[j] = 0;
             for (int i = 0; i < osc.Length; i++)
             {
-                surfaceHeights[j] += osc[i].getValueAt((float)j * (Mathf.PI*2) / (float)surfaceHeights.Length);
+                surfaceHeights[j] += osc[i].getValueAt((float)j * (Mathf.PI * 2) / (float)surfaceHeights.Length);
             }
-	    }
+        }
+        for (int i = 0; i < osc.Length; i++) osc[i].parent = this;
+        for (int i = 0; i < osc.Length; i++) osc[i].Update();
+        for (int i= osc.Length ; i<prevOsc.Length ; i++) prevOsc[i].extinct();
+        prevOsc = new OneOsc[osc.Length];
+        for (int i = 0; i < osc.Length; i++) prevOsc[i] = osc[i];
     }
 
 }
@@ -35,7 +45,32 @@ public class OneOsc
     public float phase = 1;
     public float transport = 0;
     public WaveShape shape = WaveShape.sine;
+    WaveShape prevShape = WaveShape.sine;
+
+    AudioSource previewSfx;
+
+    public Oscillator parent;
     
+    public void Update()
+    {
+        if (previewSfx==null)
+        {
+            previewSfx = Object.Instantiate(parent.sfxModel);
+        }
+        if (prevShape!=shape) { 
+            previewSfx.GetComponent<AudioSource>().clip = previewSfx.GetComponent<OscPreview>().loops[(int)shape];
+            previewSfx.GetComponent<AudioSource>().Play();
+            prevShape = shape;
+        }
+        previewSfx.GetComponent<AudioSource>().pitch = frequency;
+        previewSfx.GetComponent<AudioSource>().volume = amplitude;
+    }
+
+    public void extinct()
+    {
+        Object.Destroy(previewSfx.gameObject);
+    }
+
     public float getValueAt(float x) {
         float phasor = (x * frequency + phase) % (Mathf.PI*2);
 

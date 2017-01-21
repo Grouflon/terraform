@@ -82,8 +82,5 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  osc:
-  - frequency: 2
-    amplitude: 1
-    phase: 0
-    shape: 0
+  osc: []
+  sfxModel: {fileID: 82544599513813730, guid: 568aa844e58f7d747bf40b4adcc9b6bb, type: 2}
