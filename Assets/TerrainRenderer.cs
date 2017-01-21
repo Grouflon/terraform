@@ -15,15 +15,18 @@ public class TerrainRenderer : MonoBehaviour {
         solid
     }
 
-    public Oscillator oscillator;
     public float stepSize = 5.0f;
     public float amplifier = 10.0f;
     public float heightConstant = 10.0f;
+
+    public Material terraformMaterial;
+    public Material runningMaterial;
 
     // Use this for initialization
     void Start()
     {
         m_statesManager = FindObjectOfType<StatesManager>();
+        m_oscillator = FindObjectOfType<Oscillator>();
         m_meshFilter = GetComponent<MeshFilter>();
         m_meshRenderer = GetComponent<MeshRenderer>();
         m_collider = GetComponent<EdgeCollider2D>();
@@ -36,10 +39,10 @@ public class TerrainRenderer : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (oscillator == null)
+        if (m_oscillator == null)
             return;
 
-        int terrainLength = oscillator.surfaceHeights.Length;
+        int terrainLength = m_oscillator.surfaceHeights.Length;
 
         m_vertices = new Vector3[terrainLength * 2];
         m_indices = new int[terrainLength * 6];
@@ -50,12 +53,12 @@ public class TerrainRenderer : MonoBehaviour {
         for (int i = 0; i < terrainLength ; ++i)
         {
             float xPosition = i * stepSize;
-            float value = oscillator.surfaceHeights[i] * amplifier + heightConstant;
+            float value = m_oscillator.surfaceHeights[i] * amplifier + heightConstant;
 
             colliderPoints[i] = new Vector2(xPosition, value);
 
-            m_vertices[i * 2 + 0] = new Vector3(xPosition, value, 0.0f);
-            m_vertices[i * 2 + 1] = new Vector3(xPosition, 0.0f, 0.0f);
+            m_vertices[i * 2 + 0] = new Vector3(xPosition, value, 0.1f);
+            m_vertices[i * 2 + 1] = new Vector3(xPosition, 0.0f, 0.1f);
 
             linePoints[i] = new Vector3(xPosition, value, 0.0f);
 
@@ -84,12 +87,14 @@ public class TerrainRenderer : MonoBehaviour {
         if (m_statesManager.state == StatesManager.GameStates.terraform)
         {
             m_lineRenderer.enabled = true;
-            m_meshRenderer.enabled = false;
+            //m_meshRenderer.enabled = false;
+            m_meshRenderer.material = terraformMaterial;
         }
         else
         {
             m_lineRenderer.enabled = false;
-            m_meshRenderer.enabled = true;
+            //m_meshRenderer.enabled = true;
+            m_meshRenderer.material = runningMaterial;
         }
     }
 
@@ -101,5 +106,6 @@ public class TerrainRenderer : MonoBehaviour {
     EdgeCollider2D m_collider;
     LineRenderer m_lineRenderer;
 
+    Oscillator m_oscillator;
     StatesManager m_statesManager;
 }

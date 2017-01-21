@@ -5,12 +5,11 @@ using UnityEngine;
 public class StatesManager : MonoBehaviour
 {
     public InputController input;
-    public OscillatorController oscController;
 
+    [HideInInspector]
     public GameStates state = GameStates.running;
 
 	void Start () {
-        m_terrainRenderer = FindObjectOfType<TerrainRenderer>();
 	}
 	
 	void Update () {
@@ -47,6 +46,4 @@ public class StatesManager : MonoBehaviour
         running,
         terraform
     }
-
-    private TerrainRenderer m_terrainRenderer;
 }
