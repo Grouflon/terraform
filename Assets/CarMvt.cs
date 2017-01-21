@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CarMvt : MonoBehaviour {
 
+    public GameObject statesManager;
+
 	void Start () {
 		
 	}
@@ -11,11 +13,13 @@ public class CarMvt : MonoBehaviour {
 	void Update () {
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(1.0f, 0));
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y+transform.localScale.y), Vector2.up);
-        if (hit.collider!=null) {
-            Vector2 pos = transform.position;
-            pos.y += hit.distance + transform.localScale.y*2;
-            transform.position = pos;
+        if (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.terraform) { 
+            if (hit.collider!=null) {
+                Vector2 pos = transform.position;
+                pos.y += hit.distance + transform.localScale.y*2;
+                transform.position = pos;
+            }
         }
-	}
+    }
     
 }
