@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CarMvt2 : MonoBehaviour
 {
-
     Vector2 lastRunningPosition;
 
     public WheelJoint2D frontWheel;
