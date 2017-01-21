@@ -15,6 +15,5 @@ public class AudioManager : MonoBehaviour {
 
     void Update () {
         runningMusic.volume = statesManager.GetComponent<StatesManager>().state==StatesManager.GameStates.running?1:0;
-
     }
 }

@@ -9,10 +9,12 @@ public class StatesManager : MonoBehaviour
     [HideInInspector]
     public GameStates state = GameStates.running;
 
-	void Start () {
-	}
-	
-	void Update () {
+    void Start()
+    {
+    }
+
+    void Update()
+    {
         if (input.GetAnyShapeMode())
         {
             state = GameStates.terraform;
