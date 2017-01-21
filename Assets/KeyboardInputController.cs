@@ -7,20 +7,20 @@ public class KeyboardInputController : InputController {
     public override float GetAmplitudeChange()
     {
         float result = 0.0f;
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q))
-            result -= 1.0f;
-        if (Input.GetKey(KeyCode.D))
-            result += 1.0f;
-
-        return result;
-    }
-
-    public override float GetFrequencyChange()
-    {
-        float result = 0.0f;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z))
             result += 1.0f;
         if (Input.GetKey(KeyCode.S))
+            result -= 1.0f;
+
+        return result;
+    }
+    
+    public override float GetFrequencyChange()
+    {
+        float result = 0.0f;
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q))
+            result -= 1.0f;
+        if (Input.GetKey(KeyCode.D))
             result += 1.0f;
 
         return result;
