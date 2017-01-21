@@ -52,13 +52,13 @@ public class TerrainRenderer : MonoBehaviour {
 
         for (int i = 0; i < terrainLength ; ++i)
         {
-            float xPosition = i * stepSize;
-            float value = m_oscillator.surfaceHeights[i] * amplifier + heightConstant;
+            float xPosition = (terrainLength * -0.5f * stepSize) + i * stepSize;
+            float value = m_oscillator.surfaceHeights[i] * amplifier;
 
             colliderPoints[i] = new Vector2(xPosition, value);
 
             m_vertices[i * 2 + 0] = new Vector3(xPosition, value, 0.1f);
-            m_vertices[i * 2 + 1] = new Vector3(xPosition, 0.0f, 0.1f);
+            m_vertices[i * 2 + 1] = new Vector3(xPosition, -heightConstant, 0.1f);
 
             linePoints[i] = new Vector3(xPosition, value, 0.0f);
 
@@ -81,8 +81,8 @@ public class TerrainRenderer : MonoBehaviour {
         m_lineRenderer.numPositions = terrainLength;
         m_lineRenderer.SetPositions(linePoints);
 
-        m_lineRenderer.startWidth = 1.0f + 0.25f * Mathf.Sin(Time.time * 4.0f);
-        m_lineRenderer.startWidth = 1.0f + 0.25f * Mathf.Cos(Time.time * 4.0f);
+        m_lineRenderer.startWidth = 0.3f + 0.08f * Mathf.Sin(Time.time * 4.0f);
+        m_lineRenderer.startWidth = 0.3f + 0.08f * Mathf.Cos(Time.time * 4.0f);
 
         if (m_statesManager.state == StatesManager.GameStates.terraform)
         {
