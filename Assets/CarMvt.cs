@@ -7,7 +7,6 @@ public class CarMvt : MonoBehaviour {
     public GameObject statesManager;
 
     Vector2 lastRunningPosition;
-    // Vector2 lastTerraformPosition;
 
     void Start () {
 		
@@ -15,19 +14,22 @@ public class CarMvt : MonoBehaviour {
 
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + transform.localScale.y), Vector2.up);
+        float heightLookup = 100;
+        int layer = LayerMask.GetMask("Terrain");
         
         if (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.terraform)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+            if (transform.position.y > lastRunningPosition.y) transform.position = new Vector2(lastRunningPosition.x, lastRunningPosition.y);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + heightLookup), Vector2.down, heightLookup, layer);
             if (hit.collider != null)
             {
-                Vector2 pos = transform.position;
-                pos.y += hit.distance + transform.localScale.y * 2;
-                transform.position = pos;
+
+                if (hit.point.y > transform.position.y)
+                {
+                    transform.position = new Vector2(transform.position.x, hit.point.y);
+                }
             }
-            transform.position = new Vector2(lastRunningPosition.x, Mathf.Min(lastRunningPosition.y,transform.position.y));
-            // lastTerraformPosition = new Vector2(transform.position.x, transform.position.y);
         }
 
         if (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running)
