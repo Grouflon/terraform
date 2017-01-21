@@ -66,13 +66,13 @@ public class OneOsc
         {
             previewSfx = Object.Instantiate(parent.sfxModel);
         }
-        if (prevShape!=shape) { 
+        if (!prevShape.Equals(shape)) {
             previewSfx.GetComponent<AudioSource>().clip = previewSfx.GetComponent<OscPreview>().loops[(int)shape];
             previewSfx.GetComponent<AudioSource>().Play();
             prevShape = shape;
         }
-        previewSfx.GetComponent<AudioSource>().pitch = frequency*0.2f;
-        previewSfx.GetComponent<AudioSource>().volume = parent.statesManager.state == StatesManager.GameStates.terraform ? amplitude : 0.0f;
+        previewSfx.GetComponent<AudioSource>().pitch = frequency*0.2f; 
+        previewSfx.GetComponent<AudioSource>().volume = (parent.statesManager.state == StatesManager.GameStates.terraform) ? Mathf.Abs(amplitude) : 0.0f;
     }
 
     public void extinct()
@@ -82,6 +82,7 @@ public class OneOsc
 
     public float getValueAt(float x) {
         float phasor = ((x - parent.middlePoint) * frequency + phase);
+        float linearPhasor = ((x - parent.middlePoint) * frequency + phase);
         while (phasor<0||phasor>=Mathf.PI*2) phasor = (phasor + Mathf.PI * 2) % (Mathf.PI*2);
 
         phasor += transport * (Time.time/* % (1.0f / frequency)*/);
@@ -108,7 +109,7 @@ public class OneOsc
         }
         if (shape == WaveShape.noise)
         {
-            return (Mathf.PerlinNoise(phasor,0)-0.5f)*amplitude;
+            return (Mathf.PerlinNoise(linearPhasor,0)-0.5f)*amplitude;
         }
         return 0;
     }

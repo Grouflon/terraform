@@ -9,7 +9,7 @@ public class OscillatorController : MonoBehaviour {
     public float minFrequency = 1.0f;
     public float maxFrequency = 100.0f;
 
-    public float minAmplitude = 1.0f;
+    public float minAmplitude = -100.0f;
     public float maxAmplitude = 100.0f;
 
     public float amplitudeSensitivity = 0.01f;
