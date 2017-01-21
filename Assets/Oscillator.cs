@@ -11,6 +11,7 @@ public class Oscillator : MonoBehaviour
     public OneOsc[] osc = new OneOsc[0];
     OneOsc[] prevOsc = new OneOsc[0];
     public AudioSource sfxModel;
+    public float middlePoint = Mathf.PI;
 
     [HideInInspector]
     public StatesManager statesManager;
@@ -22,6 +23,8 @@ public class Oscillator : MonoBehaviour
 
     void Update()
     {
+        for (int i = 0; i < osc.Length; i++) osc[i].parent = this;
+        for (int i = 0; i < osc.Length; i++) osc[i].Update();
         for (int j = 0; j < surfaceHeights.Length; j++)
         {
             surfaceHeights[j] = 0;
@@ -30,8 +33,6 @@ public class Oscillator : MonoBehaviour
                 surfaceHeights[j] += osc[i].getValueAt((float)j * (Mathf.PI * 2) / (float)surfaceHeights.Length);
             }
         }
-        for (int i = 0; i < osc.Length; i++) osc[i].parent = this;
-        for (int i = 0; i < osc.Length; i++) osc[i].Update();
         for (int i = 0; i < prevOsc.Length; i++)
         {
             bool found = false;
@@ -80,8 +81,7 @@ public class OneOsc
     }
 
     public float getValueAt(float x) {
-        float middle = Mathf.PI; 
-        float phasor = (middle + x * frequency + phase);
+        float phasor = ((x - parent.middlePoint) * frequency + phase);
         while (phasor<0||phasor>=Mathf.PI*2) phasor = (phasor + Mathf.PI * 2) % (Mathf.PI*2);
 
         phasor += transport * (Time.time/* % (1.0f / frequency)*/);

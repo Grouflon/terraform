@@ -34,7 +34,7 @@ public class CarMvt : MonoBehaviour {
 
         if (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(3.0f, 0));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(7.0f, 0));
             transform.position = new Vector2(transform.position.x%200, transform.position.y);
             lastRunningPosition = new Vector2(transform.position.x, transform.position.y);
         }
