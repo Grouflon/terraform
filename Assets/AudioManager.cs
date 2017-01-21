@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource runningMusic;
     public AudioSource loot;
     public AudioSource die;
+    public AudioSource win;
 
     void Start () {
         statesManager = FindObjectOfType<StatesManager>();
@@ -27,6 +28,11 @@ public class AudioManager : MonoBehaviour {
     public void playDie()
     {
         die.Play();
+    }
+
+    public void playWin()
+    {
+        win.Play();
     }
 
 }
