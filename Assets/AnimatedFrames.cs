@@ -9,14 +9,16 @@ public class AnimatedFrames : MonoBehaviour {
     int currentFrame = 0;
     float cTime = 0;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    [HideInInspector]
+    public StatesManager statesManager;
+
+    void Start () {
+        statesManager = FindObjectOfType<StatesManager>();
+    }
 	
-	// Update is called once per frame
 	void Update () {
         cTime += Time.deltaTime;
         GetComponent<SpriteRenderer>().sprite = frames[(Mathf.FloorToInt(cTime*animSpeed)%frames.Length)];
+        GetComponent<SpriteRenderer>().enabled = (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running);
     }
 }
