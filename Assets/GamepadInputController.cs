@@ -76,4 +76,14 @@ public class GamepadInputController : InputController
     {
         return Input.GetButtonDown("Start");
     }
+
+    public override StatesManager.GameStates currentGameState()
+    {
+        return Input.GetButton("A")
+            || Input.GetButton("B")
+            || Input.GetButton("X")
+            || Input.GetButton("Y") ?
+            StatesManager.GameStates.terraform : StatesManager.GameStates.running;
+    }
+
 }

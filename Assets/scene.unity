@@ -167,7 +167,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1.25
+        value: 1.2492005
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -351,6 +351,95 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!1 &725027823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 725027825}
+  - component: {fileID: 725027824}
+  m_Layer: 0
+  m_Name: oscillatorController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &725027824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725027823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352e183a6a319d042a11b2c3dc765a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oscillator: {fileID: 1315741155}
+  minFrequency: 1
+  maxFrequency: 100
+  minAmplitude: 1
+  maxAmplitude: 100
+  phaseChangeFactor: 1
+--- !u!4 &725027825
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725027823}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 90.046036, y: 6.819843, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1236820568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1236820570}
+  - component: {fileID: 1236820569}
+  m_Layer: 0
+  m_Name: keyboardInputController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1236820569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1236820568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d3954ba363bc14c98bbcf4424b14e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitudeSensitivity: 0.01
+  frequencySensitivity: 0.01
+  stateManager: {fileID: 1882454035}
+--- !u!4 &1236820570
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1236820568}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 90.046036, y: 6.819843, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1315741155 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114653417926821356, guid: 024e096c11712e44cab28cc0eb828aec,
@@ -10458,6 +10547,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92bfc42e87de4b49a401a3c7905a0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 1236820569}
+  oscController: {fileID: 725027824}
+  state: 0
 --- !u!4 &1882454037
 Transform:
   m_ObjectHideFlags: 0
@@ -10553,7 +10645,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1926896271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 96.8, y: 0, z: -10}
+  m_LocalPosition: {x: 100, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10570,7 +10662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30dd67ee0e7587e498b4a798dae683b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabled: 1
 --- !u!1 &1928156544
 GameObject:
   m_ObjectHideFlags: 0
@@ -10687,6 +10778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20bb3cbfdb37fa4a84b7c91c61fc1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statesManager: {fileID: 1882454035}
 --- !u!1001 &2013281949
 Prefab:
   m_ObjectHideFlags: 0
@@ -10697,7 +10789,7 @@ Prefab:
     - target: {fileID: 114653417926821356, guid: 024e096c11712e44cab28cc0eb828aec,
         type: 2}
       propertyPath: osc.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4624932746413258, guid: 024e096c11712e44cab28cc0eb828aec, type: 2}
       propertyPath: m_LocalPosition.x
@@ -10739,12 +10831,12 @@ Prefab:
     - target: {fileID: 114653417926821356, guid: 024e096c11712e44cab28cc0eb828aec,
         type: 2}
       propertyPath: osc.Array.data[0].frequency
-      value: 4.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114653417926821356, guid: 024e096c11712e44cab28cc0eb828aec,
         type: 2}
       propertyPath: osc.Array.data[0].amplitude
-      value: 3.43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114653417926821356, guid: 024e096c11712e44cab28cc0eb828aec,
         type: 2}
