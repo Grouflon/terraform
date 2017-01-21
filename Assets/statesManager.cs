@@ -7,10 +7,10 @@ public class StatesManager : MonoBehaviour
     public InputController input;
     public OscillatorController oscController;
 
-    GameStates state = GameStates.running;
+    public GameStates state = GameStates.running;
 
 	void Start () {
-		
+        m_terrainRenderer = FindObjectOfType<TerrainRenderer>();
 	}
 	
 	void Update () {
@@ -26,18 +26,23 @@ public class StatesManager : MonoBehaviour
         {
             Time.timeScale = 0;
             oscController.enabled = true;
+
+            Camera.main.backgroundColor = Color.black;
         }
         else
         {
             Time.timeScale = 1;
             oscController.enabled = false;
+
+            Camera.main.backgroundColor = new Color(146.0f / 255.0f, 174.0f / 255.0f, 1.0f);
         }
     }
 
-    enum GameStates
+    public enum GameStates
     {
         running,
         terraform
     }
 
+    private TerrainRenderer m_terrainRenderer;
 }

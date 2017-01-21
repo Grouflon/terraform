@@ -11,10 +11,13 @@ public class Oscillator : MonoBehaviour
     public OneOsc[] osc = new OneOsc[0];
     OneOsc[] prevOsc = new OneOsc[0];
     public AudioSource sfxModel;
+
+    [HideInInspector]
+    public StatesManager statesManager;
     
     void Start()
     {
-
+        statesManager = FindObjectOfType<StatesManager>();
     }
 
     void Update()
@@ -68,7 +71,7 @@ public class OneOsc
             prevShape = shape;
         }
         previewSfx.GetComponent<AudioSource>().pitch = frequency*0.2f;
-        previewSfx.GetComponent<AudioSource>().volume = amplitude;
+        previewSfx.GetComponent<AudioSource>().volume = parent.statesManager.state == StatesManager.GameStates.terraform ? amplitude : 0.0f;
     }
 
     public void extinct()
