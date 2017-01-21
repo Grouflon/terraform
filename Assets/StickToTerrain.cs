@@ -12,7 +12,7 @@ public class StickToTerrain : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate ()
+	void Update ()
     {
         int layer = LayerMask.GetMask("Terrain");
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, 100.0f), new Vector2(0.0f, -1.0f), 200.0f, layer);
