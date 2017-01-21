@@ -7,7 +7,7 @@ public class CarMvt : MonoBehaviour {
     public GameObject statesManager;
 
     Vector2 lastRunningPosition;
-    Vector2 lastTerraformPosition;
+    // Vector2 lastTerraformPosition;
 
     void Start () {
 		
@@ -27,19 +27,13 @@ public class CarMvt : MonoBehaviour {
                 transform.position = pos;
             }
             transform.position = new Vector2(lastRunningPosition.x, Mathf.Min(lastRunningPosition.y,transform.position.y));
-            lastTerraformPosition = new Vector2(transform.position.x, transform.position.y);
+            // lastTerraformPosition = new Vector2(transform.position.x, transform.position.y);
         }
 
         if (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(3.0f, 0));
             transform.position = new Vector2(transform.position.x%200, transform.position.y);
-            if (hit.collider != null)
-            {
-                Vector2 pos = transform.position;
-                pos.y += hit.distance + transform.localScale.y * 2;
-                transform.position = pos;
-            }
             lastRunningPosition = new Vector2(transform.position.x, transform.position.y);
         }
 

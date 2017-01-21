@@ -107,4 +107,14 @@ public class KeyboardInputController : InputController {
     {
         return Input.GetKeyDown(KeyCode.Space);
     }
+
+    public override StatesManager.GameStates currentGameState()
+    {
+        return Input.GetKey(KeyCode.Keypad1)
+            || Input.GetKey(KeyCode.Keypad2)
+            || Input.GetKey(KeyCode.Keypad3)
+            || Input.GetKey(KeyCode.Keypad4)?
+            StatesManager.GameStates.terraform:StatesManager.GameStates.running;
+    }
+
 }

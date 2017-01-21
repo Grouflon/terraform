@@ -14,22 +14,22 @@ public class StatesManager : MonoBehaviour
 	}
 	
 	void Update () {
-        if (input.ToggleGameState())
+        /*if (input.ToggleGameState())
         {
-            if (state == GameStates.terraform)
-                state = GameStates.running;
-            else
-                state = GameStates.terraform;
-        }
+            if (state == GameStates.terraform) state = GameStates.running;
+            else state = GameStates.terraform;
+        }*/
+
+        state = input.currentGameState();
 
         if (state == GameStates.terraform)
         {
-            Time.timeScale = 0;
+            // Time.timeScale = 0;
             oscController.enabled = true;
         }
         else
         {
-            Time.timeScale = 1;
+            // Time.timeScale = 1;
             oscController.enabled = false;
         }
     }

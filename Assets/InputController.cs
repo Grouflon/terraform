@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class InputController : MonoBehaviour
 {
     public abstract bool ToggleGameState();
-
+    public abstract StatesManager.GameStates currentGameState();
+    
     public abstract bool PreviousWave();
     public abstract bool NextWave();
     public abstract bool IsFrequencyLocked();
