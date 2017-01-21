@@ -59,22 +59,22 @@ public class KeyboardInputController : InputController {
 
     public override bool GetSineShapeChange()
     {
-        return Input.GetKeyDown(KeyCode.Keypad1);
+        return Input.GetKey(KeyCode.Keypad1);
     }
 
     public override bool GetSquareShapeChange()
     {
-        return Input.GetKeyDown(KeyCode.Keypad2);
+        return Input.GetKey(KeyCode.Keypad2);
     }
 
     public override bool GetSawShapeChange()
     {
-        return Input.GetKeyDown(KeyCode.Keypad3);
+        return Input.GetKey(KeyCode.Keypad3);
     }
 
     public override bool GetNoiseShapeChange()
     {
-        return Input.GetKeyDown(KeyCode.Keypad4);
+        return Input.GetKey(KeyCode.Keypad4);
     }
 
     public override bool PreviousWave()
