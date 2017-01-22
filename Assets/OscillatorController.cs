@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OscillatorController : MonoBehaviour {
 
-    public TerrainRenderer terrainPrefab;
+    public GameObject terrainPrefab;
     public Oscillator oscillator;
 
     public float minFrequency = 1.0f;
@@ -99,7 +99,8 @@ public class OscillatorController : MonoBehaviour {
             Vector3 position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, start + i * ((end - start) / m_previewRenderers.Length), 0.0f));
             position.z = 0.0f;
 
-            m_previewRenderers[i] = (TerrainRenderer)Instantiate(terrainPrefab, position, Quaternion.identity);
+            GameObject obj = Instantiate(terrainPrefab, position, Quaternion.identity);
+            m_previewRenderers[i] = obj.GetComponent<TerrainRenderer>();
 
             m_previewRenderers[i].targetWave = i;
             m_previewRenderers[i].amplifier = 0.2f;
