@@ -23,6 +23,9 @@ public class StatesManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
         if (previousState != state)
         {
             if (state == GameStates.terraform) audioManager.switchOn();
