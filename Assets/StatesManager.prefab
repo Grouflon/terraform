@@ -57,6 +57,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 114679460770175660}
   state: 0
+  terraformingTimeScale: 0.1
+  timeScaleLerpRatio: 0.1
 --- !u!114 &114529709670082006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,6 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 114679460770175660}
   state: 0
+  terraformingTimeScale: 0.1
+  timeScaleLerpRatio: 0.01
 --- !u!114 &114679460770175660
 MonoBehaviour:
   m_ObjectHideFlags: 1

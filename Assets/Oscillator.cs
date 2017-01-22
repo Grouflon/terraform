@@ -46,6 +46,11 @@ public class Oscillator : MonoBehaviour
         for (int i = 0; i < osc.Length; i++) prevOsc[i] = osc[i];
     }
 
+    public void resetOsc()
+    {
+        
+    }
+
 }
 
 [System.Serializable]
