@@ -81,7 +81,7 @@ public class CarMvt : MonoBehaviour {
         {
             m_touchingGround = true;
             m_groundNormal = col.contacts[0].normal;
-            if (col.relativeVelocity.magnitude>20) FindObjectOfType<AudioManager>().charHit();
+            if (col.relativeVelocity.magnitude>25) FindObjectOfType<AudioManager>().charHit();
         }
     }
 
