@@ -29,7 +29,7 @@ public class KeyboardInputController : InputController {
     public override float GetPhaseChange()
     {
         float result = 0.0f;
-        if (Input.GetKey(KeyCode.M))
+        if (Input.GetKey(KeyCode.M) || Input.GetKey(KeyCode.Semicolon))
             result -= 1.0f;
         if (Input.GetKey(KeyCode.K))
             result += 1.0f;
