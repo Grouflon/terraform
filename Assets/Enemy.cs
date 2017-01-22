@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour {
             Enemy[] enemies = FindObjectsOfType<Enemy>() as Enemy[];
             for (int i = 0; i < enemies.Length; i++) if (enemies[i]!=this) Destroy(enemies[i].gameObject);
             Destroy(gameObject);
+
+            FindObjectOfType<LevelManager>().score = 0;
         }
     }
 

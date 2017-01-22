@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
@@ -16,6 +17,9 @@ public class LevelManager : MonoBehaviour {
     float elapsedForPopping = 0;
     int nextToPop = 0;
 
+    public int score = 0;
+    public Text scoreText;
+
     public GameObject loot;
     public GameObject enemy;
 
@@ -27,6 +31,9 @@ public class LevelManager : MonoBehaviour {
     }
     
     void Update () {
+
+        scoreText.text = "" + score;
+
         Loot[] loots = FindObjectsOfType<Loot>() as Loot[];
         if (loots.Length == 0)
         {
