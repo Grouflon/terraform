@@ -72,6 +72,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 59cf14cd7aeadaa40b9c63cfb559120e, type: 3}
   - {fileID: 21300000, guid: 6f251754b2678664b97028cac0dde15f, type: 3}
   - {fileID: 21300000, guid: f47ba2560482564488627fa4f88c7d47, type: 3}
+  - {fileID: 21300000, guid: 5993072bf0f2c554cb184b9af23bd052, type: 3}
   statesManager: {fileID: 0}
   scaleRange: 0.5
 --- !u!212 &212059359770632254

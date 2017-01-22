@@ -106,16 +106,16 @@ public class OneOsc
         }
         if (shape == WaveShape.square)
         {
-            if (phasor < Mathf.PI) return amplitude;
+            if (phasor < Mathf.PI) return amplitude*0.5f;
             return -amplitude;
         }
         if (shape == WaveShape.saw)
         {
-            return ((phasor/(Mathf.PI*2))-0.5f) * -amplitude;
+            return ((phasor/(Mathf.PI*2))-0.5f) * -amplitude*2.0f;
         }
         if (shape == WaveShape.noise)
         {
-            return (Mathf.PerlinNoise(linearPhasor,0)-0.5f)*amplitude;
+            return (Mathf.PerlinNoise(linearPhasor/2.0f,0)-0.5f)*amplitude*2.75f;
         }
         return 0;
     }
