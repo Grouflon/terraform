@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour {
     public AudioSource loot;
     public AudioSource die;
     public AudioSource win;
+    public AudioSource switchOnSfx;
+    public AudioSource switchOffSfx;
 
     void Start () {
         statesManager = FindObjectOfType<StatesManager>();
@@ -33,6 +35,16 @@ public class AudioManager : MonoBehaviour {
     public void playWin()
     {
         win.Play();
+    }
+
+    public void switchOn()
+    {
+        switchOnSfx.Play();
+    }
+
+    public void switchOff()
+    {
+        switchOffSfx.Play();
     }
 
 }

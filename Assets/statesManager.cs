@@ -8,13 +8,24 @@ public class StatesManager : MonoBehaviour
 
     [HideInInspector]
     public GameStates state = GameStates.running;
+    GameStates previousState = GameStates.running;
+
+    [HideInInspector]
+    AudioManager audioManager;
 
     void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
     {
+        if (!previousState.Equals(state))
+        {
+            if (state==GameStates.terraform) audioManager.switchOn();
+            if (state == GameStates.running) audioManager.switchOff();
+            previousState = state;
+        }
         if (input.GetAnyShapeMode())
         {
             state = GameStates.terraform;
