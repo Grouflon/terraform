@@ -29,6 +29,8 @@ public class Enemy : MonoBehaviour {
             Oscillator oscillo = FindObjectOfType<Oscillator>();
             oscillo.resetOsc();
             Destroy(gameObject);
+
+            FindObjectOfType<LevelManager>().score = 0;
         }
     }
 

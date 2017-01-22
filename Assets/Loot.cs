@@ -20,6 +20,8 @@ public class Loot : MonoBehaviour {
         if (other.tag.Equals("Car")) {
             audioManager.GetComponent<AudioManager>().playLoot();
             Destroy(gameObject);
+
+            FindObjectOfType<LevelManager>().score++;
         }
     }
 
