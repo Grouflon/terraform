@@ -5,8 +5,13 @@ using UnityEngine;
 public class Prop : MonoBehaviour {
 
     public Sprite[] sprites = new Sprite[7];
-    
-	void Start () {
+
+    [HideInInspector]
+    public StatesManager statesManager;
+
+    void Start()
+    {
+        statesManager = FindObjectOfType<StatesManager>();
         GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 7)];
         transform.position = new Vector2(-100+Random.value*200,200);
         float scale = Random.value*2.0f + 1.0f;
@@ -24,5 +29,6 @@ public class Prop : MonoBehaviour {
             transform.position = hit.point;
         }
         transform.position = new Vector3(transform.position.x, transform.position.y, 1.5f);
+        GetComponent<SpriteRenderer>().enabled = (statesManager.state == StatesManager.GameStates.running);
     }
 }
