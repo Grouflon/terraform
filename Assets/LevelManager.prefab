@@ -54,6 +54,7 @@ MonoBehaviour:
   car: {fileID: 0}
   audioManager: {fileID: 0}
   prop: {fileID: 1943123830962238, guid: 0c08485aace5b80438c4609c20c13c44, type: 2}
+  propCount: 50
   poppingSpeed: 5
   loot: {fileID: 1819462060551034, guid: 8e85405c57cdc1743bd6d52dcb2ed239, type: 2}
   enemy: {fileID: 1800617138089562, guid: 6dd2471d83216a94181399cc7289fe66, type: 2}
