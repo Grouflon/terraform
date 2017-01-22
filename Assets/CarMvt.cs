@@ -64,6 +64,7 @@ public class CarMvt : MonoBehaviour {
                 if (m_rigidbody.velocity.magnitude < jumpSpeedThreshold)
                 {
                     m_rigidbody.AddForce(m_groundNormal * jumpForce, ForceMode2D.Impulse);
+                    FindObjectOfType<AudioManager>().charJump();
                 }
 
                 if (Mathf.Abs(m_rigidbody.velocity.x) > motorSpeedThreshold)
@@ -80,6 +81,7 @@ public class CarMvt : MonoBehaviour {
         {
             m_touchingGround = true;
             m_groundNormal = col.contacts[0].normal;
+            if (col.relativeVelocity.magnitude>20) FindObjectOfType<AudioManager>().charHit();
         }
     }
 

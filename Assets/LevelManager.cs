@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour {
             added.transform.position = new Vector2(Random.value * (screenEndX-screenStartX) + screenStartX, Random.value * (screenEndY - screenStartY) + screenStartY);
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(added.transform.position.x, added.transform.position.y + 200), Vector2.down, 200, LayerMask.GetMask("Terrain"));
             if (hit.collider!=null) added.transform.position = hit.point;
+            audioManager.bonusPop();
             elapsedForPopping -= poppingSpeed;
             nextToPop = (nextToPop+1)% 2;
         }
