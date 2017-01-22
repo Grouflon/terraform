@@ -58,6 +58,6 @@ public class OscillatorController : MonoBehaviour {
         }
     }
 
-    int m_currentWave = 0;
+    public int m_currentWave = 0;
     StatesManager m_statesManager;
 }

@@ -22,6 +22,8 @@ public class TerrainRenderer : MonoBehaviour {
     public Material terraformMaterial;
     public Material runningMaterial;
 
+    public bool currentOnly = false;
+
     // Use this for initialization
     void Start()
     {
@@ -34,6 +36,7 @@ public class TerrainRenderer : MonoBehaviour {
 
         m_mesh = new Mesh();
         m_meshFilter.mesh = m_mesh;
+
     }
 
     // Update is called once per frame
@@ -53,7 +56,7 @@ public class TerrainRenderer : MonoBehaviour {
         for (int i = 0; i < terrainLength ; ++i)
         {
             float xPosition = (terrainLength * -0.5f * stepSize) + i * stepSize;
-            float value = m_oscillator.surfaceHeights[i] * amplifier;
+            float value = (currentOnly?m_oscillator.currentSurfaceHeights[i]:m_oscillator.surfaceHeights[i]) * amplifier;
 
             colliderPoints[i] = new Vector2(xPosition, value);
 
@@ -95,6 +98,7 @@ public class TerrainRenderer : MonoBehaviour {
             m_lineRenderer.enabled = false;
             //m_meshRenderer.enabled = true;
             m_meshRenderer.material = runningMaterial;
+            if (currentOnly) m_meshRenderer.enabled = false;
         }
     }
 

@@ -8,6 +8,7 @@ public class Oscillator : MonoBehaviour
 
     [Range(-5.0f, 5.0f)]
     public float[] surfaceHeights;
+    public float[] currentSurfaceHeights;
     public OneOsc[] osc = new OneOsc[0];
     OneOsc[] prevOsc = new OneOsc[0];
     public AudioSource sfxModel;
@@ -15,23 +16,25 @@ public class Oscillator : MonoBehaviour
 
     [HideInInspector]
     public StatesManager statesManager;
-    
+    [HideInInspector]
+    public OscillatorController oscilatorController;
+
     void Start()
     {
         statesManager = FindObjectOfType<StatesManager>();
+        oscilatorController = FindObjectOfType<OscillatorController>();
     }
 
     void Update()
     {
         for (int i = 0; i < osc.Length; i++) osc[i].parent = this;
         for (int i = 0; i < osc.Length; i++) osc[i].Update();
+        currentSurfaceHeights = new float[surfaceHeights.Length];
         for (int j = 0; j < surfaceHeights.Length; j++)
         {
             surfaceHeights[j] = 0;
-            for (int i = 0; i < osc.Length; i++)
-            {
-                surfaceHeights[j] += osc[i].getValueAt((float)j * (Mathf.PI * 2) / (float)surfaceHeights.Length);
-            }
+            for (int i = 0; i < osc.Length; i++) surfaceHeights[j] += osc[i].getValueAt((float)j * (Mathf.PI * 2) / surfaceHeights.Length);
+            currentSurfaceHeights[j] = osc[oscilatorController.m_currentWave].getValueAt((float)j * (Mathf.PI * 2) / surfaceHeights.Length);
         }
         for (int i = 0; i < prevOsc.Length; i++)
         {
