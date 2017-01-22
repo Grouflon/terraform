@@ -29,9 +29,9 @@ public class KeyboardInputController : InputController {
     public override float GetPhaseChange()
     {
         float result = 0.0f;
-        if (Input.GetKey(KeyCode.K))
-            result -= 1.0f;
         if (Input.GetKey(KeyCode.M))
+            result -= 1.0f;
+        if (Input.GetKey(KeyCode.K))
             result += 1.0f;
 
         return result;
