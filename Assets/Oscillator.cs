@@ -75,6 +75,7 @@ public class OneOsc
     public float transport = 0;
     public WaveShape shape = WaveShape.sine;
     WaveShape prevShape = WaveShape.sine;
+    public bool active = false;
 
     AudioSource previewSfx;
 
@@ -92,7 +93,7 @@ public class OneOsc
             prevShape = shape;
         }
         previewSfx.GetComponent<AudioSource>().pitch = frequency*0.2f; 
-        previewSfx.GetComponent<AudioSource>().volume = (parent.statesManager.state == StatesManager.GameStates.terraform) ? Mathf.Abs(amplitude) : 0.0f;
+        previewSfx.GetComponent<AudioSource>().volume = (parent.statesManager.state == StatesManager.GameStates.terraform && active) ? Mathf.Abs(amplitude) : 0.0f;
     }
 
     public void extinct()
@@ -101,6 +102,9 @@ public class OneOsc
     }
 
     public float getValueAt(float x) {
+
+        if (!active) return 0;
+
         float phasor = ((x - parent.middlePoint) * frequency + phase);
         float linearPhasor = ((x - parent.middlePoint) * frequency + phase);
         while (phasor<0||phasor>=Mathf.PI*2) phasor = (phasor + Mathf.PI * 2) % (Mathf.PI*2);
