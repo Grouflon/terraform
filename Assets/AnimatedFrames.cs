@@ -10,6 +10,8 @@ public class AnimatedFrames : MonoBehaviour {
     public bool pingpong = false;
     bool forward = true;
 
+    public bool hideInTerraform = true;
+
     [HideInInspector]
     public StatesManager statesManager;
 
@@ -28,6 +30,13 @@ public class AnimatedFrames : MonoBehaviour {
         }
 
         GetComponent<SpriteRenderer>().sprite = frames[Mathf.FloorToInt(cTime)];
-        GetComponent<SpriteRenderer>().enabled = (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running);
+        if (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = !hideInTerraform;
+        }
     }
 }
