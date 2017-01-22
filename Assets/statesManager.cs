@@ -29,7 +29,7 @@ public class StatesManager : MonoBehaviour
             if (state == GameStates.running) audioManager.switchOff();
             previousState = state;
         }
-        if (input.GetAnyShapeMode())
+        if (input.IsAnyWaveOn())
         {
             state = GameStates.terraform;
         }

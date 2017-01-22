@@ -45,73 +45,73 @@ public class MultiInputController : InputController {
         return result;
     }
 
-    public override bool GetSineShapeMode()
+    public override bool GetWave0()
     {
         bool result = false;
 
         foreach (InputController input in inputs)
         {
-            result = result || input.GetSineShapeMode();
+            result = result || input.GetWave0();
         }
 
         return result;
     }
 
-    public override bool GetSquareShapeMode()
+    public override bool GetWave1()
     {
         bool result = false;
 
         foreach (InputController input in inputs)
         {
-            result = result || input.GetSquareShapeMode();
+            result = result || input.GetWave1();
         }
 
         return result;
     }
 
-    public override bool GetSawShapeMode()
+    public override bool GetWave2()
     {
         bool result = false;
 
         foreach (InputController input in inputs)
         {
-            result = result || input.GetSawShapeMode();
+            result = result || input.GetWave2();
         }
 
         return result;
     }
 
-    public override bool GetNoiseShapeMode()
+    public override bool GetWave3()
     {
         bool result = false;
 
         foreach (InputController input in inputs)
         {
-            result = result || input.GetNoiseShapeMode();
+            result = result || input.GetWave3();
         }
 
         return result;
     }
 
-    public override bool PreviousWave()
+    public override bool PreviousShape()
     {
         bool result = false;
 
         foreach (InputController input in inputs)
         {
-            result = result || input.PreviousWave();
+            result = result || input.PreviousShape();
         }
 
         return result;
     }
 
-    public override bool NextWave()
+    public override bool NextShape()
     {
         bool result = false;
 
         foreach (InputController input in inputs)
         {
-            result = result || input.NextWave();
+            result = result || input.NextShape();
         }
 
         return result;

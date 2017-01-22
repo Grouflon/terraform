@@ -20,32 +20,32 @@ public class GamepadInputController : InputController
         return Input.GetAxis("DPadHorizontal");
     }
 
-    public override bool GetSineShapeMode()
+    public override bool GetWave0()
     {
         return Input.GetButton("A");
     }
 
-    public override bool GetSquareShapeMode()
+    public override bool GetWave1()
     {
         return Input.GetButton("B");
     }
 
-    public override bool GetSawShapeMode()
+    public override bool GetWave2()
     {
         return Input.GetButton("X");
     }
 
-    public override bool GetNoiseShapeMode()
+    public override bool GetWave3()
     {
         return Input.GetButton("Y");
     }
 
-    public override bool PreviousWave()
+    public override bool PreviousShape()
     {
         return Input.GetButtonDown("LeftBumper");
     }
 
-    public override bool NextWave()
+    public override bool NextShape()
     {
         return Input.GetButtonDown("RightBumper");
     }

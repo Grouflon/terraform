@@ -37,32 +37,32 @@ public class KeyboardInputController : InputController {
         return result;
     }
 
-    public override bool GetSineShapeMode()
+    public override bool GetWave0()
     {
         return Input.GetKey(KeyCode.Keypad1);
     }
 
-    public override bool GetSquareShapeMode()
+    public override bool GetWave1()
     {
         return Input.GetKey(KeyCode.Keypad2);
     }
 
-    public override bool GetSawShapeMode()
+    public override bool GetWave2()
     {
         return Input.GetKey(KeyCode.Keypad3);
     }
 
-    public override bool GetNoiseShapeMode()
+    public override bool GetWave3()
     {
         return Input.GetKey(KeyCode.Keypad4);
     }
 
-    public override bool PreviousWave()
+    public override bool PreviousShape()
     {
         return Input.GetKeyDown(KeyCode.O);
     }
 
-    public override bool NextWave()
+    public override bool NextShape()
     {
         return Input.GetKeyDown(KeyCode.L);
     }

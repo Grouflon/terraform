@@ -28,7 +28,7 @@ public class OscillatorController : MonoBehaviour {
         oscillator.osc[0].active = true;
         for (int i = 1; i < oscillator.osc.Length; ++i)
         {
-            oscillator.osc[i].active = false;
+            oscillator.osc[i].active = true;
         }
 
         m_previewRenderers = new TerrainRenderer[oscillator.osc.Length];
@@ -46,21 +46,52 @@ public class OscillatorController : MonoBehaviour {
         if (m_currentWave >= oscillator.osc.Length)
             m_currentWave = oscillator.osc.Length - 1;
 
-        OneOsc currentOscillator = oscillator.osc[m_currentWave];
 
-        if (m_statesManager.input.GetAnyShapeMode())
+        if (m_statesManager.input.IsAnyWaveOn())
         {
+            if (m_statesManager.input.GetWave0()) m_currentWave = 0;
+            else if (m_statesManager.input.GetWave1()) m_currentWave = 1;
+            else if (m_statesManager.input.GetWave2()) m_currentWave = 2;
+            else if (m_statesManager.input.GetWave3()) m_currentWave = 3;
+
+            OneOsc currentOscillator = oscillator.osc[m_currentWave];
+
+
             currentOscillator.amplitude = Mathf.Clamp(currentOscillator.amplitude + m_statesManager.input.GetAmplitudeChange() * amplitudeSensitivity, minAmplitude, maxAmplitude);
             currentOscillator.frequency = Mathf.Clamp(currentOscillator.frequency + m_statesManager.input.GetFrequencyChange() * frequencySensitivity, minFrequency, maxFrequency);
 
-            if (m_statesManager.input.GetSineShapeMode()) currentOscillator.shape = OneOsc.WaveShape.sine;
-            if (m_statesManager.input.GetSquareShapeMode()) currentOscillator.shape = OneOsc.WaveShape.square;
-            if (m_statesManager.input.GetSawShapeMode()) currentOscillator.shape = OneOsc.WaveShape.saw;
-            if (m_statesManager.input.GetNoiseShapeMode()) currentOscillator.shape = OneOsc.WaveShape.noise;
+            int shapeIndex = (int)currentOscillator.shape;
+            if (m_statesManager.input.PreviousShape()) --shapeIndex;
+            if (m_statesManager.input.NextShape()) ++shapeIndex;
+
+
+            int shapeCount = System.Enum.GetNames(typeof(OneOsc.WaveShape)).Length;
+
+            shapeIndex = (shapeIndex + shapeCount) % shapeCount;
+
+            currentOscillator.shape = (OneOsc.WaveShape)shapeIndex;
 
             currentOscillator.phase += m_statesManager.input.GetPhaseChange() * phaseSensitivity;
 
-            if (m_statesManager.input.NextWave())
+            for (int i = 0; i < oscillator.osc.Length; ++i)
+            {
+                if (i == m_currentWave)
+                {
+                    m_previewRenderers[i].width = 0.2f;
+                    Color color = Color.white;
+                    color.a = 0.5f;
+                    m_previewRenderers[i].material = activeWaveMaterial;
+                }
+                else
+                {
+                    m_previewRenderers[i].width = 0.1f;
+                    Color color = Color.green;
+                    color.a = 0.2f;
+                    m_previewRenderers[i].material = idleWaveMaterial;
+                }
+            }
+
+            /*if (m_statesManager.input.NextWave())
             {
                 m_currentWave = Mathf.Clamp(m_currentWave + 1, 0, oscillator.osc.Length - 1);
                 RegenerateWavePreviews();
@@ -69,12 +100,12 @@ public class OscillatorController : MonoBehaviour {
             {
                 m_currentWave = Mathf.Clamp(m_currentWave - 1, 0, oscillator.osc.Length - 1);
                 RegenerateWavePreviews();
-            }
+            }*/
 
-            for (int i = 0; i < oscillator.osc.Length; ++i)
+            /*for (int i = 0; i < oscillator.osc.Length; ++i)
             {
                 oscillator.osc[i].active = i <= m_currentWave;
-            }
+            }*/
         }
     }
 
@@ -91,8 +122,8 @@ public class OscillatorController : MonoBehaviour {
 
         for (int i = 0; i < m_previewRenderers.Length; ++i)
         {
-            if (i > m_currentWave)
-                break;
+            /*if (i > m_currentWave)
+                break;*/
 
             float start = 0.75f;
             float end = 0.97f;
@@ -103,17 +134,17 @@ public class OscillatorController : MonoBehaviour {
             m_previewRenderers[i] = obj.GetComponent<TerrainRenderer>();
 
             m_previewRenderers[i].targetWave = i;
-            m_previewRenderers[i].amplifier = 0.2f;
+            m_previewRenderers[i].amplifier = 0.3f;
             m_previewRenderers[i].GetComponent<EdgeCollider2D>().enabled = false;
 
-            if (i == m_currentWave)
+            /*if (i == m_currentWave)
             {
                 m_previewRenderers[i].width = 0.2f;
                 Color color = Color.white;
                 color.a = 0.5f;
                 m_previewRenderers[i].material = activeWaveMaterial;
             }
-            else
+            else*/
             {
                 m_previewRenderers[i].width = 0.1f;
                 Color color = Color.green;
