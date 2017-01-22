@@ -90,13 +90,13 @@ public class TerrainRenderer : MonoBehaviour {
         if (m_statesManager.state == StatesManager.GameStates.terraform)
         {
             m_lineRenderer.enabled = true;
-            //m_meshRenderer.enabled = false;
-            m_meshRenderer.material = terraformMaterial;
+            m_meshRenderer.enabled = false;
+            //m_meshRenderer.material = terraformMaterial;
         }
         else
         {
             m_lineRenderer.enabled = false;
-            //m_meshRenderer.enabled = true;
+            m_meshRenderer.enabled = true;
             m_meshRenderer.material = runningMaterial;
             if (currentOnly) m_meshRenderer.enabled = false;
         }

@@ -11,11 +11,13 @@ public class Prop : MonoBehaviour {
 
     void Start()
     {
+        float screenStart = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).x - 1.0f;
+        float screenEnd = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f)).x + 1.0f;
+
         statesManager = FindObjectOfType<StatesManager>();
         GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 7)];
-        transform.position = new Vector2(-100+Random.value*200,200);
-        float scale = Random.value*2.0f + 1.0f;
-        transform.localScale = new Vector2(scale,scale);
+        transform.position = new Vector2(screenStart + Random.value* (screenEnd - screenStart), screenEnd);
+        transform.localScale = Random.value*2.0f * transform.localScale;
     }
 	
 	
@@ -25,7 +27,6 @@ public class Prop : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 500, layer);
         if (hit.collider != null)
         {
-            print(hit.ToString());
             transform.position = hit.point;
         }
         transform.position = new Vector3(transform.position.x, transform.position.y, 1.5f);

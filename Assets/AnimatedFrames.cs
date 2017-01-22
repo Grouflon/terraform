@@ -8,6 +8,8 @@ public class AnimatedFrames : MonoBehaviour {
     public float animSpeed = 1;
     float cTime = 0;
 
+    public bool hideInTerraform = true;
+
     [HideInInspector]
     public StatesManager statesManager;
 
@@ -18,6 +20,13 @@ public class AnimatedFrames : MonoBehaviour {
 	void Update () {
         cTime += Time.deltaTime;
         GetComponent<SpriteRenderer>().sprite = frames[(Mathf.FloorToInt(cTime*animSpeed)%frames.Length)];
-        GetComponent<SpriteRenderer>().enabled = (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running);
+        if (statesManager.GetComponent<StatesManager>().state == StatesManager.GameStates.running)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = !hideInTerraform;
+        }
     }
 }
