@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819462060551034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9867478, y: 18.790329, z: 0}
-  m_LocalScale: {x: 9.18557, y: 8.67047, z: 1}
+  m_LocalPosition: {x: 26.329678, y: -17.792482, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,9 +75,9 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.03, y: 0.08}
   serializedVersion: 2
-  m_Radius: 0.15
+  m_Radius: 0.9
 --- !u!114 &114168179246330916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,10 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frames:
-  - {fileID: 21300000, guid: 3234b3e226807cd4ebe258ca9b7fe4a2, type: 3}
-  - {fileID: 21300000, guid: ac043b3eb8c9bb84783e5383e15f1a86, type: 3}
-  - {fileID: 21300000, guid: 02a9afa717d7e5a418c66458eb58d9b9, type: 3}
-  - {fileID: 21300000, guid: 8a692be0bb62fab4289cb2ea7ebdafae, type: 3}
+  - {fileID: 21300000, guid: ef45b9321e687df408a1518190cb9ed1, type: 3}
   animSpeed: 15
   pingpong: 0
   hideInTerraform: 0
@@ -142,7 +139,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3234b3e226807cd4ebe258ca9b7fe4a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef45b9321e687df408a1518190cb9ed1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
