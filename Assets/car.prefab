@@ -95,7 +95,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a352d7b8c217ca48b60acc242fd4685, type: 3}
   animSpeed: 0.2
   pingpong: 0
-  hideInTerraform: 1
+  hideInTerraform: 0
   statesManager: {fileID: 0}
 --- !u!114 &114756089479197728
 MonoBehaviour:
