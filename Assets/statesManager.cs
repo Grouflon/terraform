@@ -9,6 +9,9 @@ public class StatesManager : MonoBehaviour
     [HideInInspector]
     public GameStates state = GameStates.running;
 
+    public float terraformingTimeScale = 0.1f;
+    public float timeScaleLerpRatio = 0.01f;
+
     void Start()
     {
     }
@@ -32,6 +35,8 @@ public class StatesManager : MonoBehaviour
 
             Camera.main.backgroundColor = Color.black;
             Camera.main.GetComponent<PostRenderer>().enabled = true;
+
+            Time.timeScale = Mathf.Lerp(Time.timeScale, terraformingTimeScale, timeScaleLerpRatio);
         }
         else
         {
@@ -40,6 +45,8 @@ public class StatesManager : MonoBehaviour
 
             Camera.main.backgroundColor = new Color(146.0f / 255.0f, 174.0f / 255.0f, 1.0f);
             Camera.main.GetComponent<PostRenderer>().enabled = false;
+
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, timeScaleLerpRatio);
         }
     }
 
