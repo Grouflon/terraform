@@ -10,6 +10,14 @@ public class LevelManager : MonoBehaviour {
     public AudioManager audioManager;
 
     public GameObject prop;
+    bool winDone = false;
+
+    public float poppingSpeed = 5;
+    float elapsedForPopping = 0;
+    int nextToPop = 0;
+
+    public GameObject loot;
+    public GameObject enemy;
 
     void Start()
     {
@@ -22,8 +30,30 @@ public class LevelManager : MonoBehaviour {
         Loot[] loots = FindObjectsOfType<Loot>() as Loot[];
         if (loots.Length == 0)
         {
-            audioManager.playWin();
-            Destroy(gameObject);// TODO pas bien
+            if (!winDone)
+            {
+                audioManager.playWin();
+                winDone = true;
+            }
         }
-	}
+        else
+        {
+            winDone = false;
+        }
+        elapsedForPopping += Time.deltaTime;
+        while (elapsedForPopping > poppingSpeed)
+        {
+            GameObject toAdd = null;
+            if (nextToPop == 0) toAdd = loot;
+            if (nextToPop == 1) toAdd = enemy;
+            Instantiate(toAdd);
+            float screenStartX = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).x;
+            float screenEndX = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f)).x;
+            float screenStartY = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).y;
+            float screenEndY = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 1.0f, 0.0f)).y;
+            toAdd.transform.position = new Vector2(Random.value * (screenEndX-screenStartX) + screenStartX, Random.value * (screenEndY - screenStartY) + screenStartY);
+            elapsedForPopping -= poppingSpeed;
+            nextToPop = (nextToPop+1)% 2;
+        }
+    }
 }

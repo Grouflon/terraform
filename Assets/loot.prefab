@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819462060551034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.6, y: 18, z: 0}
+  m_LocalPosition: {x: 9.033411, y: 3.830284, z: 0}
   m_LocalScale: {x: 9.18557, y: 8.67047, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,6 +95,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 02a9afa717d7e5a418c66458eb58d9b9, type: 3}
   - {fileID: 21300000, guid: 8a692be0bb62fab4289cb2ea7ebdafae, type: 3}
   animSpeed: 15
+  pingpong: 0
   hideInTerraform: 0
   statesManager: {fileID: 0}
 --- !u!114 &114278642901190658
