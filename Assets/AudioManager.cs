@@ -57,12 +57,12 @@ public class AudioManager : MonoBehaviour {
 
     public void charHit()
     {
-        charHitSfx.Play();
+        charHitSfx.GetComponent<audioPool>().play();
     }
 
     public void charJump()
     {
-        charJumpSfx.Play();
+        charJumpSfx.GetComponent<audioPool>().play();
     }
 
 }
