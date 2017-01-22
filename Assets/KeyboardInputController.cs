@@ -29,9 +29,9 @@ public class KeyboardInputController : InputController {
     public override float GetPhaseChange()
     {
         float result = 0.0f;
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.M))
             result -= 1.0f;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.K))
             result += 1.0f;
 
         return result;
@@ -59,11 +59,11 @@ public class KeyboardInputController : InputController {
 
     public override bool PreviousWave()
     {
-        return Input.GetKeyDown(KeyCode.UpArrow);
+        return Input.GetKeyDown(KeyCode.O);
     }
 
     public override bool NextWave()
     {
-        return Input.GetKeyDown(KeyCode.DownArrow);
+        return Input.GetKeyDown(KeyCode.L);
     }
 }
