@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
 
+    [HideInInspector]
     public CarMvt car;
+    [HideInInspector]
     public AudioManager audioManager;
+
+    public GameObject prop;
 
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         car = FindObjectOfType<CarMvt>();
+        for (int i = 0; i < 20; i++) Instantiate(prop);
     }
     
     void Update () {
