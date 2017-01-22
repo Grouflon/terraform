@@ -33,12 +33,21 @@ public class Oscillator : MonoBehaviour
         {
             for (int i = 0; i < osc.Length; i++)
             {
-                osc[i].amplitude *= 1 - (1 - resetCounter) / 10.0f;
+                osc[i].amplitude *= 1 - (1 - resetCounter) / 8.0f;
                 osc[i].frequency *= 1 - (1 - resetCounter) / 10.0f;
             }
-            resetCounter -= 1.0f * Time.deltaTime;
+            resetCounter -= 1.2f * Time.deltaTime;
         }
-        else resetCounter = 0;
+        else
+        {
+            if (resetCounter != -1) {
+                  resetCounter = -1;
+                    for (int i = 0; i < osc.Length; i++)
+                    {
+                        osc[i].amplitude = 0;
+                    }
+                }
+            }
         for (int i = 0; i < osc.Length; i++) osc[i].parent = this;
         for (int i = 0; i < osc.Length; i++) osc[i].Update();
         currentSurfaceHeights = new float[surfaceHeights.Length];

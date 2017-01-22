@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour {
 
     public void playWin()
     {
-        win.Play();
+        // win.Play();
     }
 
     public void switchOn()
