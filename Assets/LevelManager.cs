@@ -53,14 +53,15 @@ public class LevelManager : MonoBehaviour {
             GameObject toAdd = null;
             if (nextToPop == 0) toAdd = loot;
             if (nextToPop == 1) toAdd = enemy;
-            Instantiate(toAdd);
+            GameObject added = Instantiate(toAdd);
             float screenStartX = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).x;
             float screenEndX = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f)).x;
             float screenStartY = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).y;
             float screenEndY = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 1.0f, 0.0f)).y;
-            toAdd.transform.position = new Vector2(Random.value * (screenEndX-screenStartX) + screenStartX, Random.value * (screenEndY - screenStartY) + screenStartY);
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(toAdd.transform.position.x, toAdd.transform.position.y + 200), Vector2.down, 200, LayerMask.GetMask("Terrain"));
-            if (hit.collider!=null) toAdd.transform.position = hit.point;
+            added.transform.position = new Vector2(Random.value * (screenEndX-screenStartX) + screenStartX, Random.value * (screenEndY - screenStartY) + screenStartY);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(added.transform.position.x, added.transform.position.y + 200), Vector2.down, 200, LayerMask.GetMask("Terrain"));
+            if (hit.collider!=null) added.transform.position = hit.point;
+            audioManager.bonusPop();
             elapsedForPopping -= poppingSpeed;
             nextToPop = (nextToPop+1)% 2;
         }

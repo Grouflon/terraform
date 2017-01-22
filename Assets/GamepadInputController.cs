@@ -17,7 +17,7 @@ public class GamepadInputController : InputController
 
     public override float GetPhaseChange()
     {
-        return Input.GetAxis("DPadHorizontal");
+        return -Input.GetAxis("DPadHorizontal");
     }
 
     public override bool GetWave0()
