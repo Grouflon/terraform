@@ -6,7 +6,7 @@ public class AnimatedFrames : MonoBehaviour {
 
     public Sprite[] frames = new Sprite[3];
     public float animSpeed = 1;
-    public float cTime = 0;
+    float cTime = 0;
     public bool pingpong = false;
     bool forward = true;
 
