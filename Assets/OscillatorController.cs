@@ -104,6 +104,7 @@ public class OscillatorController : MonoBehaviour {
 
             m_previewRenderers[i].targetWave = i;
             m_previewRenderers[i].amplifier = 0.2f;
+            m_previewRenderers[i].GetComponent<EdgeCollider2D>().enabled = false;
 
             if (i == m_currentWave)
             {

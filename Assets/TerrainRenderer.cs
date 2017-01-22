@@ -95,6 +95,7 @@ public class TerrainRenderer : MonoBehaviour {
         m_mesh.SetIndices(m_indices, MeshTopology.Triangles, 0);
 
         m_collider.points = colliderPoints;
+        m_collider.enabled = targetWave < 0;
 
         m_lineRenderer.numPositions = terrainLength;
         m_lineRenderer.SetPositions(linePoints);
@@ -104,13 +105,13 @@ public class TerrainRenderer : MonoBehaviour {
         m_lineRenderer.endWidth = width + width * varyingFactor * Mathf.Cos(m_time);
         m_lineRenderer.material = material;
 
+
         if (m_statesManager.state == StatesManager.GameStates.terraform)
         {
             m_lineRenderer.enabled = true;
             m_meshRenderer.enabled = false;
             if (targetWave >= 0)
             {
-                m_collider.enabled = false;
             }
             //m_meshRenderer.material = terraformMaterial;
         }
@@ -121,7 +122,6 @@ public class TerrainRenderer : MonoBehaviour {
             m_meshRenderer.material = runningMaterial;
             if (targetWave >= 0)
             {
-                m_collider.enabled = false;
                 m_meshRenderer.enabled = false;
             }
         }
