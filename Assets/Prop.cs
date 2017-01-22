@@ -9,17 +9,12 @@ public class Prop : MonoBehaviour {
     [HideInInspector]
     public StatesManager statesManager;
 
-    float swingFr = 0;
-    float swingAm = 0;
     public float scaleRange = 0.5f;
 
     void Start()
     {
         float screenStart = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).x - 1.0f;
         float screenEnd = Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f)).x + 1.0f;
-
-        swingFr = Random.value + 1.0f;
-        swingAm = Random.value * 30.0f;
 
         statesManager = FindObjectOfType<StatesManager>();
         GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 7)];
@@ -29,7 +24,6 @@ public class Prop : MonoBehaviour {
 	
 	
     void Update () {
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(Time.time * swingFr / 5.0f) * swingAm);
         /*transform.position = new Vector2(transform.position.x, 200);
         int layer = LayerMask.GetMask("Terrain");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 500, layer);

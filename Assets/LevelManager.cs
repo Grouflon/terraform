@@ -52,6 +52,8 @@ public class LevelManager : MonoBehaviour {
             float screenStartY = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).y;
             float screenEndY = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 1.0f, 0.0f)).y;
             toAdd.transform.position = new Vector2(Random.value * (screenEndX-screenStartX) + screenStartX, Random.value * (screenEndY - screenStartY) + screenStartY);
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(toAdd.transform.position.x, toAdd.transform.position.y + 200), Vector2.down, 200, LayerMask.GetMask("Terrain"));
+            if (hit.collider!=null) toAdd.transform.position = hit.point;
             elapsedForPopping -= poppingSpeed;
             nextToPop = (nextToPop+1)% 2;
         }
