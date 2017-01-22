@@ -22,7 +22,11 @@ public class TerrainRenderer : MonoBehaviour {
     public Material terraformMaterial;
     public Material runningMaterial;
 
-    public bool currentOnly = false;
+    public float width = 0.3f;
+    public Material material;
+
+    [HideInInspector]
+    public int targetWave = -1;
 
     // Use this for initialization
     void Start()
@@ -42,6 +46,8 @@ public class TerrainRenderer : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        m_time += Time.timeScale > 0.0f ? Time.deltaTime / Time.timeScale : 0.0f;
+
         if (m_oscillator == null)
             return;
 
@@ -56,7 +62,16 @@ public class TerrainRenderer : MonoBehaviour {
         for (int i = 0; i < terrainLength ; ++i)
         {
             float xPosition = (terrainLength * -0.5f * stepSize) + i * stepSize;
-            float value = (currentOnly?m_oscillator.currentSurfaceHeights[i]:m_oscillator.surfaceHeights[i]) * amplifier;
+            float value;
+            if (targetWave < 0)
+            {
+                value = m_oscillator.surfaceHeights[i];
+            }
+            else
+            {
+                value = m_oscillator.osc[targetWave].getValueAt((float)i * (Mathf.PI * 2) / terrainLength);
+            }
+            value *= amplifier;
 
             colliderPoints[i] = new Vector2(xPosition, value);
 
@@ -84,13 +99,19 @@ public class TerrainRenderer : MonoBehaviour {
         m_lineRenderer.numPositions = terrainLength;
         m_lineRenderer.SetPositions(linePoints);
 
-        m_lineRenderer.startWidth = 0.3f + 0.08f * Mathf.Sin(Time.time * 4.0f);
-        m_lineRenderer.startWidth = 0.3f + 0.08f * Mathf.Cos(Time.time * 4.0f);
+        float varyingFactor = 0.2f;
+        m_lineRenderer.startWidth = width + width * varyingFactor * Mathf.Sin(m_time);
+        m_lineRenderer.endWidth = width + width * varyingFactor * Mathf.Cos(m_time);
+        m_lineRenderer.material = material;
 
         if (m_statesManager.state == StatesManager.GameStates.terraform)
         {
             m_lineRenderer.enabled = true;
             m_meshRenderer.enabled = false;
+            if (targetWave >= 0)
+            {
+                m_collider.enabled = false;
+            }
             //m_meshRenderer.material = terraformMaterial;
         }
         else
@@ -98,10 +119,15 @@ public class TerrainRenderer : MonoBehaviour {
             m_lineRenderer.enabled = false;
             m_meshRenderer.enabled = true;
             m_meshRenderer.material = runningMaterial;
-            if (currentOnly) m_meshRenderer.enabled = false;
+            if (targetWave >= 0)
+            {
+                m_collider.enabled = false;
+                m_meshRenderer.enabled = false;
+            }
         }
     }
 
+    float m_time = 0.0f;
     Vector3[] m_vertices;
     int[] m_indices;
     Mesh m_mesh;

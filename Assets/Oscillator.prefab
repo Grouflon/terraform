@@ -453,8 +453,10 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  currentSurfaceHeights: []
   osc:
-  - frequency: 0
+  - active: 0
+    frequency: 0
     amplitude: 0
     phase: 0
     transport: 0
@@ -463,6 +465,7 @@ MonoBehaviour:
   sfxModel: {fileID: 82544599513813730, guid: 568aa844e58f7d747bf40b4adcc9b6bb, type: 2}
   middlePoint: 3.1415927
   statesManager: {fileID: 0}
+  oscilatorController: {fileID: 0}
 --- !u!114 &114412066410440404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -474,6 +477,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352e183a6a319d042a11b2c3dc765a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrainPrefab: {fileID: 114086276772841950, guid: a7b9883a7a26aff4bb7283ec761c63ae,
+    type: 2}
   oscillator: {fileID: 114189518163183808}
   minFrequency: 1.5
   maxFrequency: 20
@@ -482,3 +487,4 @@ MonoBehaviour:
   amplitudeSensitivity: 0.1
   frequencySensitivity: 0.1
   phaseSensitivity: 0.1
+  m_currentWave: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OscillatorController : MonoBehaviour {
 
+    public TerrainRenderer terrainPrefab;
     public Oscillator oscillator;
 
     public float minFrequency = 1.0f;
@@ -17,9 +18,21 @@ public class OscillatorController : MonoBehaviour {
 
     public float phaseSensitivity = 1.0f;
 
+    public Material idleWaveMaterial;
+    public Material activeWaveMaterial;
+
     void Start()
     {
         m_statesManager = FindObjectOfType<StatesManager>();
+
+        oscillator.osc[0].active = true;
+        for (int i = 1; i < oscillator.osc.Length; ++i)
+        {
+            oscillator.osc[i].active = false;
+        }
+
+        m_previewRenderers = new TerrainRenderer[oscillator.osc.Length];
+        RegenerateWavePreviews();
     }
 
     void Update ()
@@ -49,14 +62,66 @@ public class OscillatorController : MonoBehaviour {
 
             if (m_statesManager.input.NextWave())
             {
-                m_currentWave = (m_currentWave + 1) % oscillator.osc.Length;
+                m_currentWave = Mathf.Clamp(m_currentWave + 1, 0, oscillator.osc.Length - 1);
+                RegenerateWavePreviews();
             }
             if (m_statesManager.input.PreviousWave())
             {
-                m_currentWave = (m_currentWave - 1 + oscillator.osc.Length) % oscillator.osc.Length;
+                m_currentWave = Mathf.Clamp(m_currentWave - 1, 0, oscillator.osc.Length - 1);
+                RegenerateWavePreviews();
+            }
+
+            for (int i = 0; i < oscillator.osc.Length; ++i)
+            {
+                oscillator.osc[i].active = i <= m_currentWave;
             }
         }
     }
+
+    void RegenerateWavePreviews()
+    {
+        for (int i = 0; i < m_previewRenderers.Length; ++i)
+        {
+            if (m_previewRenderers[i] != null)
+            {
+                Destroy(m_previewRenderers[i].gameObject);
+                m_previewRenderers[i] = null;
+            }
+        }
+
+        for (int i = 0; i < m_previewRenderers.Length; ++i)
+        {
+            if (i > m_currentWave)
+                break;
+
+            float start = 0.75f;
+            float end = 0.97f;
+            Vector3 position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, start + i * ((end - start) / m_previewRenderers.Length), 0.0f));
+            position.z = 0.0f;
+
+            m_previewRenderers[i] = (TerrainRenderer)Instantiate(terrainPrefab, position, Quaternion.identity);
+
+            m_previewRenderers[i].targetWave = i;
+            m_previewRenderers[i].amplifier = 0.2f;
+
+            if (i == m_currentWave)
+            {
+                m_previewRenderers[i].width = 0.2f;
+                Color color = Color.white;
+                color.a = 0.5f;
+                m_previewRenderers[i].material = activeWaveMaterial;
+            }
+            else
+            {
+                m_previewRenderers[i].width = 0.1f;
+                Color color = Color.green;
+                color.a = 0.2f;
+                m_previewRenderers[i].material = idleWaveMaterial;
+            }
+        }
+    }
+
+    TerrainRenderer[] m_previewRenderers;
 
     public int m_currentWave = 0;
     StatesManager m_statesManager;

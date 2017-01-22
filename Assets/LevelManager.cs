@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
 
     public GameObject prop;
     bool winDone = false;
-
+    public int propCount = 30;
     public float poppingSpeed = 5;
     float elapsedForPopping = 0;
     int nextToPop = 0;
@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour {
     {
         audioManager = FindObjectOfType<AudioManager>();
         car = FindObjectOfType<CarMvt>();
-        for (int i = 0; i < 20; i++) Instantiate(prop);
+        for (int i = 0; i < 30; i++) Instantiate(prop);
     }
     
     void Update () {

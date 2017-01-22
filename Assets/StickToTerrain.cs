@@ -18,10 +18,8 @@ public class StickToTerrain : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, 100.0f), new Vector2(0.0f, -1.0f), 200.0f, layer);
         if (hit.collider != null)
         {
-            transform.position = hit.point;
-            Vector3 forward = new Vector3(hit.normal.y, -hit.normal.x, 0.0f); ;
-            transform.LookAt(transform.position + forward, hit.normal);
-
+            transform.position = new Vector3(hit.point.x, hit.point.y, transform.position.z);
+            transform.LookAt(transform.position + new Vector3(0.0f, 0.0f, 1.0f), hit.normal);
             transform.rotation = m_baseRotation * transform.rotation;
         }
     }
