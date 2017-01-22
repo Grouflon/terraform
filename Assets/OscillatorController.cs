@@ -125,8 +125,12 @@ public class OscillatorController : MonoBehaviour {
             /*if (i > m_currentWave)
                 break;*/
 
+            /*
             float start = 0.75f;
             float end = 0.97f;
+            */
+            float start = 0.05f;
+            float end = 0.15f;
             Vector3 position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, start + i * ((end - start) / m_previewRenderers.Length), 0.0f));
             position.z = 0.0f;
 
@@ -134,7 +138,8 @@ public class OscillatorController : MonoBehaviour {
             m_previewRenderers[i] = obj.GetComponent<TerrainRenderer>();
 
             m_previewRenderers[i].targetWave = i;
-            m_previewRenderers[i].amplifier = 0.3f;
+            //m_previewRenderers[i].amplifier = 0.3f;
+            m_previewRenderers[i].amplifier = 0.8f;
             m_previewRenderers[i].GetComponent<EdgeCollider2D>().enabled = false;
 
             /*if (i == m_currentWave)
