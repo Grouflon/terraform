@@ -9,6 +9,8 @@ public class Prop : MonoBehaviour {
     [HideInInspector]
     public StatesManager statesManager;
 
+    public float scaleRange = 0.5f;
+
     void Start()
     {
         float screenStart = Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).x - 1.0f;
@@ -16,20 +18,20 @@ public class Prop : MonoBehaviour {
 
         statesManager = FindObjectOfType<StatesManager>();
         GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 7)];
-        transform.position = new Vector2(screenStart + Random.value* (screenEnd - screenStart), screenEnd);
-        transform.localScale = Random.value*2.0f * transform.localScale;
+        transform.position = new Vector3(screenStart + Random.value* (screenEnd - screenStart), screenEnd, 1.5f);
+        transform.localScale = Random.value*2.0f * scaleRange * transform.localScale;
     }
 	
 	
     void Update () {
-        transform.position = new Vector2(transform.position.x, 200);
+        /*transform.position = new Vector2(transform.position.x, 200);
         int layer = LayerMask.GetMask("Terrain");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 500, layer);
         if (hit.collider != null)
         {
             transform.position = hit.point;
         }
-        transform.position = new Vector3(transform.position.x, transform.position.y, 1.5f);
+        transform.position = new Vector3(transform.position.x, transform.position.y, 1.5f);*/
         GetComponent<SpriteRenderer>().enabled = (statesManager.state == StatesManager.GameStates.running);
     }
 }

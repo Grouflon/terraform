@@ -10,12 +10,13 @@ public class LevelManager : MonoBehaviour {
     public AudioManager audioManager;
 
     public GameObject prop;
+    public int propCount = 30;
 
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         car = FindObjectOfType<CarMvt>();
-        for (int i = 0; i < 20; i++) Instantiate(prop);
+        for (int i = 0; i < 30; i++) Instantiate(prop);
     }
     
     void Update () {
