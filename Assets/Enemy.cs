@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+    [HideInInspector]
     public CarMvt car;
+    [HideInInspector]
     public AudioManager audioManager;
 
     void Start()
@@ -22,6 +24,10 @@ public class Enemy : MonoBehaviour {
         if (other.tag.Equals("Car"))
         {
             audioManager.GetComponent<AudioManager>().playDie();
+            Loot[] loots = FindObjectsOfType<Loot>() as Loot[];
+            for (int i = 0; i < loots.Length; i++) Destroy(loots[i].gameObject);
+            Oscillator oscillo = FindObjectOfType<Oscillator>();
+            oscillo.resetOsc();
             Destroy(gameObject);
         }
     }
