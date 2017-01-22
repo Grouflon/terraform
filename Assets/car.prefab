@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114758921708735778}
   - component: {fileID: 114756089479197728}
   - component: {fileID: 212826109190978840}
+  - component: {fileID: 114156510499636348}
   m_Layer: 10
   m_Name: car
   m_TagString: Car
@@ -78,6 +79,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.45}
   serializedVersion: 2
   m_Radius: 1.6
+--- !u!114 &114156510499636348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1342514292745678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390f21286e87c504883bf43fca64e458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: 21300000, guid: 42662001cdbb384458704342eeb2762b, type: 3}
+  - {fileID: 21300000, guid: 8a352d7b8c217ca48b60acc242fd4685, type: 3}
+  animSpeed: 0.2
+  pingpong: 0
+  hideInTerraform: 1
+  statesManager: {fileID: 0}
 --- !u!114 &114756089479197728
 MonoBehaviour:
   m_ObjectHideFlags: 1
