@@ -19,6 +19,8 @@ public class Oscillator : MonoBehaviour
     [HideInInspector]
     public OscillatorController oscilatorController;
 
+    float resetCounter = 0;
+
     void Start()
     {
         statesManager = FindObjectOfType<StatesManager>();
@@ -27,6 +29,16 @@ public class Oscillator : MonoBehaviour
 
     void Update()
     {
+        if (resetCounter > 0)
+        {
+            for (int i = 0; i < osc.Length; i++)
+            {
+                osc[i].amplitude *= 1 - (1 - resetCounter) / 10.0f;
+                osc[i].frequency *= 1 - (1 - resetCounter) / 10.0f;
+            }
+            resetCounter -= 1.0f * Time.deltaTime;
+        }
+        else resetCounter = 0;
         for (int i = 0; i < osc.Length; i++) osc[i].parent = this;
         for (int i = 0; i < osc.Length; i++) osc[i].Update();
         currentSurfaceHeights = new float[surfaceHeights.Length];
@@ -48,7 +60,7 @@ public class Oscillator : MonoBehaviour
 
     public void resetOsc()
     {
-        
+        resetCounter = 1;
     }
 
 }
