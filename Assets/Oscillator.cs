@@ -19,6 +19,8 @@ public class Oscillator : MonoBehaviour
     [HideInInspector]
     public OscillatorController oscilatorController;
 
+    float resetCounter = 0;
+
     void Start()
     {
         statesManager = FindObjectOfType<StatesManager>();
@@ -27,6 +29,16 @@ public class Oscillator : MonoBehaviour
 
     void Update()
     {
+        if (resetCounter > 0)
+        {
+            for (int i = 0; i < osc.Length; i++)
+            {
+                osc[i].amplitude *= 1 - (1 - resetCounter) / 10.0f;
+                osc[i].frequency *= 1 - (1 - resetCounter) / 10.0f;
+            }
+            resetCounter -= 1.0f * Time.deltaTime;
+        }
+        else resetCounter = 0;
         for (int i = 0; i < osc.Length; i++) osc[i].parent = this;
         for (int i = 0; i < osc.Length; i++) osc[i].Update();
         currentSurfaceHeights = new float[surfaceHeights.Length];
@@ -48,7 +60,7 @@ public class Oscillator : MonoBehaviour
 
     public void resetOsc()
     {
-        
+        resetCounter = 1;
     }
 
 }
@@ -56,13 +68,14 @@ public class Oscillator : MonoBehaviour
 [System.Serializable]
 public class OneOsc
 {
-    public bool active = false;
+    
     public float frequency = 1;
     public float amplitude = 1;
     public float phase = 1;
     public float transport = 0;
     public WaveShape shape = WaveShape.sine;
     WaveShape prevShape = WaveShape.sine;
+    public bool active = false;
 
     AudioSource previewSfx;
 
@@ -89,8 +102,8 @@ public class OneOsc
     }
 
     public float getValueAt(float x) {
-        if (!active)
-            return 0.0f;
+
+        if (!active) return 0;
 
         float phasor = ((x - parent.middlePoint) * frequency + phase);
         float linearPhasor = ((x - parent.middlePoint) * frequency + phase);

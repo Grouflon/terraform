@@ -5,9 +5,18 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class StickToTerrain : MonoBehaviour {
 
-	// Use this for initialization
-	void Start ()
+    float swingFr = 0;
+    float swingAm = 0;
+
+    public bool swing = false;
+
+    // Use this for initialization
+    void Start ()
     {
+        if (swing) {
+            swingFr = Random.value + 1.0f;
+            swingAm = Random.value * 30.0f;
+        }
         m_baseRotation = transform.rotation;
 	}
 	
@@ -20,8 +29,9 @@ public class StickToTerrain : MonoBehaviour {
         {
             transform.position = new Vector3(hit.point.x, hit.point.y, transform.position.z);
             transform.LookAt(transform.position + new Vector3(0.0f, 0.0f, 1.0f), hit.normal);
-            transform.rotation = m_baseRotation * transform.rotation;
+            transform.rotation = m_baseRotation * transform.rotation * Quaternion.Euler(0, 0, Mathf.Sin(Time.time * swingFr / 5.0f) * swingAm);
         }
+
     }
 
     Quaternion m_baseRotation;

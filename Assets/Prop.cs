@@ -29,8 +29,8 @@ public class Prop : MonoBehaviour {
 	
 	
     void Update () {
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(Time.time * swingFr / 5.0f) * swingAm);
         /*transform.position = new Vector2(transform.position.x, 200);
-        transform.rotation = Quaternion.Euler(0,0,Mathf.Sin(Time.time * swingFr / 5.0f) * swingAm);
         int layer = LayerMask.GetMask("Terrain");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 500, layer);
         if (hit.collider != null)
