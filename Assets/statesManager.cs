@@ -23,9 +23,9 @@ public class StatesManager : MonoBehaviour
 
     void Update()
     {
-        if (!previousState.Equals(state))
+        if (previousState != state)
         {
-            if (state==GameStates.terraform) audioManager.switchOn();
+            if (state == GameStates.terraform) audioManager.switchOn();
             if (state == GameStates.running) audioManager.switchOff();
             previousState = state;
         }
