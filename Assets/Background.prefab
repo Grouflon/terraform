@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 1242266600619408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 10.9, y: 11, z: 0}
+  m_LocalScale: {x: 4.06814, y: 4.06814, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -428,9 +428,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4f14292ced345f046b2d48ac17ce77d7, type: 3}
   - {fileID: 21300000, guid: 24bf4e35ba880014aaa5b936f9fa0e1e, type: 3}
   - {fileID: 21300000, guid: b8c8d841ca7918b42ade54b629f6eeef, type: 3}
-  animSpeed: 150
-  cTime: 0
+  animSpeed: 20
   pingpong: 1
+  hideInTerraform: 1
   statesManager: {fileID: 0}
 --- !u!212 &212607371322227034
 SpriteRenderer:

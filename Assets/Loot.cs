@@ -7,12 +7,23 @@ public class Loot : MonoBehaviour {
     public CarMvt car;
     public AudioManager audioManager;
 
-	void Start () {
+    float swingFr = 0;
+    float swingAm = 0;
+
+    void Start () {
         audioManager = FindObjectOfType<AudioManager>();
         car = FindObjectOfType<CarMvt>();
+
+        swingFr = Random.value * 2.0f + 2.0f;
+        swingAm = Random.value * 30.0f;
+        m_baseScale = transform.localScale;
     }
 
-    void Update () {
+    void Update ()
+    {
+        float t = Mathf.Sin(Time.time * swingFr);
+        transform.rotation = Quaternion.Euler(0, 0, t * swingAm);
+        transform.localScale = m_baseScale + new Vector3(1.0f, 1.0f, 1.0f) * t * 0.1f;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -25,4 +36,5 @@ public class Loot : MonoBehaviour {
         }
     }
 
+    Vector3 m_baseScale;
 }

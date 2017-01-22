@@ -45,7 +45,8 @@ public class Oscillator : MonoBehaviour
                     for (int i = 0; i < osc.Length; i++)
                     {
                         osc[i].amplitude = 0;
-                    }
+                        osc[i].frequency = 7;
+                }
                 }
             }
         for (int i = 0; i < osc.Length; i++) osc[i].parent = this;

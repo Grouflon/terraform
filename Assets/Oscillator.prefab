@@ -855,33 +855,33 @@ MonoBehaviour:
   - 0
   - 0
   osc:
-  - active: 0
-    frequency: 0
+  - frequency: 7
     amplitude: 0
     phase: 0
     transport: 0
     shape: 0
+    active: 0
     parent: {fileID: 0}
-  - active: 0
-    frequency: 0
+  - frequency: 7
     amplitude: 0
     phase: 0
     transport: 0
     shape: 0
+    active: 0
     parent: {fileID: 0}
-  - active: 0
-    frequency: 0
+  - frequency: 7
     amplitude: 0
     phase: 0
     transport: 0
     shape: 0
+    active: 0
     parent: {fileID: 0}
-  - active: 0
-    frequency: 0
+  - frequency: 7
     amplitude: 0
     phase: 0
     transport: 0
     shape: 0
+    active: 0
     parent: {fileID: 0}
   sfxModel: {fileID: 82544599513813730, guid: 568aa844e58f7d747bf40b4adcc9b6bb, type: 2}
   middlePoint: 3.1415927
